@@ -1,0 +1,15 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import CategoryPage from '../../../components/CategoryPage.astro';
+
+export async function getStaticPaths() {
+  const categories = (await getCollection('categories')).filter(
+    (category) => category.data.locale === 'pt-BR',
+  );
+  return categories.map((entry) => ({ params: { id: entry.data.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: CollectionEntry<'categories'> };
+---
+
+<CategoryPage entry={entry} />

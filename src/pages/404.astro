@@ -1,0 +1,21 @@
+---
+import { homeUrl, pageUrl } from '../lib/config';
+import { t } from '../lib/i18n';
+import { getSeoDescriptor } from '../lib/seo-manifest-astro';
+import WikiLayout from '../layouts/WikiLayout.astro';
+
+const strings = t('en');
+const seo = await getSeoDescriptor('/404.html');
+---
+
+<WikiLayout seo={seo}>
+  <section class="not-found-page">
+    <span>404</span>
+    <h1>{strings.notFound}</h1>
+    <p>{strings.notFoundText}</p>
+    <div>
+      <a class="button-link" href={homeUrl('en')}>{strings.backHome}</a>
+      <a href={pageUrl('search', 'en')}>{strings.search}</a>
+    </div>
+  </section>
+</WikiLayout>

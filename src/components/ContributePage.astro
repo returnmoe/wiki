@@ -1,0 +1,77 @@
+---
+import { pageUrl, REPOSITORY_URL, type WikiLocale } from '../lib/config';
+import { t } from '../lib/i18n';
+import { getSeoDescriptor } from '../lib/seo-manifest-astro';
+import WikiLayout from '../layouts/WikiLayout.astro';
+
+interface Props {
+  locale: WikiLocale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+const seo = await getSeoDescriptor(pageUrl('contribute', locale));
+const isPortuguese = locale === 'pt-BR';
+const rawGitCommands = isPortuguese
+  ? `git clone https://github.com/returnmoe/wiki.git
+cd wiki
+git switch master
+git pull --ff-only
+git switch -c article/minha-alteracao
+npm install
+npm run verify`
+  : `git clone https://github.com/returnmoe/wiki.git
+cd wiki
+git switch master
+git pull --ff-only
+git switch -c article/my-change
+npm install
+npm run verify`;
+---
+
+<WikiLayout seo={seo}>
+  <article class="special-page prose-page">
+    <header class="special-page-header">
+      <h1>{strings.contribute}</h1>
+      <p>{strings.contributeText}</p>
+    </header>
+    {
+      isPortuguese ? (
+        <>
+          <h2>Correções rápidas</h2>
+          <p>
+            Use o link <strong>Informar um problema</strong> em qualquer artigo para abrir uma issue
+            preenchida com a página correta. Descreva a mudança e inclua uma fonte quando
+            necessário.
+          </p>
+          <h2>Editando um artigo</h2>
+          <p>
+            O link <strong>Editar</strong> abre o arquivo Markdown correspondente no repositório.
+            Faça a alteração em uma branch e abra um pull request direcionado à branch{' '}
+            <code>master</code>.
+          </p>
+          <h2>Usando Git diretamente</h2>
+          {/* prettier-ignore */}
+          <pre class="git-commands" aria-label="Comandos Git">{rawGitCommands}</pre>
+        </>
+      ) : (
+        <>
+          <h2>Quick corrections</h2>
+          <p>
+            Use the <strong>Report an issue</strong> link on any article to open an issue prefilled
+            with the correct page. Describe the change and include a source where one is needed.
+          </p>
+          <h2>Editing an article</h2>
+          <p>
+            The <strong>Edit</strong> link opens the corresponding Markdown file in the repository.
+            Make the change on a branch and open a pull request targeting <code>master</code>.
+          </p>
+          <h2>Using raw Git</h2>
+          {/* prettier-ignore */}
+          <pre class="git-commands" aria-label="Git commands">{rawGitCommands}</pre>
+        </>
+      )
+    }
+    <p><a class="button-link" href={REPOSITORY_URL}>{strings.repository}</a></p>
+  </article>
+</WikiLayout>

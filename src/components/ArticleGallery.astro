@@ -1,0 +1,292 @@
+---
+import type { WikiLocale } from '../lib/config';
+import { t } from '../lib/i18n';
+
+interface GalleryItem {
+  src: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+  sourceUrl?: string;
+  license?: string;
+}
+
+interface Props {
+  locale: WikiLocale;
+  gallery: { items: GalleryItem[] };
+}
+
+const { locale, gallery } = Astro.props;
+const strings = t(locale);
+const galleryId = locale === 'pt-BR' ? 'galeria' : 'gallery';
+---
+
+<section class="article-gallery" aria-labelledby={galleryId} data-article-gallery>
+  <h2 id={galleryId}>{strings.gallery}</h2>
+  {
+    gallery.items.length > 0 ? (
+      <>
+        <div class="article-gallery-grid">
+          {gallery.items.map((item) => (
+            <figure class="article-gallery-item">
+              <button
+                class="article-gallery-trigger"
+                type="button"
+                aria-haspopup="dialog"
+                aria-label={`${strings.galleryOpenImage}: ${item.alt}`}
+                data-gallery-open
+                data-gallery-src={item.src}
+                data-gallery-alt={item.alt}
+                data-gallery-caption={item.caption ?? ''}
+                data-gallery-source={item.credit ?? ''}
+                data-gallery-source-url={item.sourceUrl ?? ''}
+              >
+                <img src={item.src} alt="" loading="lazy" />
+                {item.caption && <span class="article-gallery-caption">{item.caption}</span>}
+              </button>
+            </figure>
+          ))}
+        </div>
+
+        <dialog
+          class="gallery-lightbox"
+          aria-label={strings.galleryImagePreview}
+          data-gallery-lightbox
+        >
+          <button
+            class="icon-button gallery-lightbox-navigation gallery-lightbox-previous"
+            type="button"
+            data-gallery-previous
+            aria-label={strings.galleryPreviousImage}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m14 6-6 6 6 6" />
+            </svg>
+          </button>
+          <button
+            class="icon-button gallery-lightbox-close"
+            type="button"
+            data-gallery-close
+            aria-label={strings.close}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+          <figure class="gallery-lightbox-figure">
+            <img data-gallery-lightbox-image alt="" />
+            <figcaption class="gallery-lightbox-details" data-gallery-lightbox-details hidden>
+              <span data-gallery-lightbox-caption hidden />
+              <small class="gallery-lightbox-source" data-gallery-lightbox-source hidden>
+                <span class="image-source-label">{strings.gallerySource}:</span>{' '}
+                <a
+                  data-gallery-lightbox-source-link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  hidden
+                />
+                <span data-gallery-lightbox-source-text hidden />
+              </small>
+            </figcaption>
+          </figure>
+          <button
+            class="icon-button gallery-lightbox-navigation gallery-lightbox-next"
+            type="button"
+            data-gallery-next
+            aria-label={strings.galleryNextImage}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m10 6 6 6-6 6" />
+            </svg>
+          </button>
+        </dialog>
+      </>
+    ) : (
+      <div class="article-gallery-empty" data-pagefind-ignore>
+        <div class="article-gallery-placeholders" aria-hidden="true">
+          {[0, 1, 2].map(() => (
+            <span>
+              <svg viewBox="0 0 48 38">
+                <rect x="5" y="5" width="38" height="28" rx="2" />
+                <circle cx="16" cy="15" r="3" />
+                <path d="m9 29 9-9 7 7 5-5 9 7" />
+              </svg>
+            </span>
+          ))}
+        </div>
+        <p>
+          <strong>{strings.galleryEmpty}</strong>
+          <span>{strings.galleryEmptyDetail}</span>
+        </p>
+      </div>
+    )
+  }
+</section>
+
+<script>
+  const promoteGalleryImagesForPrint = () => {
+    document
+      .querySelectorAll<HTMLImageElement>('[data-article-gallery] [data-gallery-open] img')
+      .forEach((image) => {
+        image.loading = 'eager';
+      });
+  };
+
+  const printMedia = window.matchMedia('print');
+  window.addEventListener('beforeprint', promoteGalleryImagesForPrint);
+  printMedia.addEventListener('change', (event) => {
+    if (event.matches) promoteGalleryImagesForPrint();
+  });
+  if (printMedia.matches) promoteGalleryImagesForPrint();
+
+  document.querySelectorAll<HTMLElement>('[data-article-gallery]').forEach((gallery) => {
+    const lightbox = gallery.querySelector<HTMLDialogElement>('[data-gallery-lightbox]');
+    const image = gallery.querySelector<HTMLImageElement>('[data-gallery-lightbox-image]');
+    const details = gallery.querySelector<HTMLElement>('[data-gallery-lightbox-details]');
+    const caption = gallery.querySelector<HTMLElement>('[data-gallery-lightbox-caption]');
+    const source = gallery.querySelector<HTMLElement>('[data-gallery-lightbox-source]');
+    const sourceLink = gallery.querySelector<HTMLAnchorElement>(
+      '[data-gallery-lightbox-source-link]',
+    );
+    const sourceText = gallery.querySelector<HTMLElement>('[data-gallery-lightbox-source-text]');
+    const close = gallery.querySelector<HTMLButtonElement>('[data-gallery-close]');
+    const previous = gallery.querySelector<HTMLButtonElement>('[data-gallery-previous]');
+    const next = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
+    const triggers = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-open]'));
+    let opener: HTMLButtonElement | undefined;
+    let currentIndex = 0;
+    let imageRequestId = 0;
+    let scrollX = 0;
+    let scrollY = 0;
+
+    if (
+      !lightbox ||
+      !image ||
+      !details ||
+      !caption ||
+      !source ||
+      !sourceLink ||
+      !sourceText ||
+      !close ||
+      !previous ||
+      !next
+    ) {
+      return;
+    }
+
+    const multipleItems = triggers.length > 1;
+    previous.hidden = !multipleItems;
+    next.hidden = !multipleItems;
+    previous.disabled = !multipleItems;
+    next.disabled = !multipleItems;
+
+    const loadImage = async (itemSource: string) => {
+      const requestId = ++imageRequestId;
+      const expectedSource = new URL(itemSource, window.location.href).href;
+      const pendingImage = new Image();
+      pendingImage.decoding = 'async';
+
+      try {
+        pendingImage.src = itemSource;
+        await pendingImage.decode();
+      } catch {
+        if (requestId !== imageRequestId || !lightbox.open) return;
+        image.removeAttribute('src');
+        image.removeAttribute('width');
+        image.removeAttribute('height');
+        delete lightbox.dataset.loading;
+        return;
+      }
+
+      if (requestId !== imageRequestId || !lightbox.open) return;
+
+      image.width = pendingImage.naturalWidth;
+      image.height = pendingImage.naturalHeight;
+      image.src = itemSource;
+
+      try {
+        await image.decode();
+      } catch {
+        // The request guard below handles images replaced by rapid navigation.
+      }
+
+      if (requestId === imageRequestId && image.src === expectedSource && lightbox.open) {
+        delete lightbox.dataset.loading;
+      }
+    };
+
+    const openItem = (index: number) => {
+      const trigger = triggers[index];
+      if (!trigger) return;
+
+      if (!lightbox.open) {
+        opener = trigger;
+        scrollX = window.scrollX;
+        scrollY = window.scrollY;
+      }
+
+      const itemSource = trigger.dataset.gallerySrc ?? '';
+      const itemCaption = trigger.dataset.galleryCaption ?? '';
+      const itemSourceLabel = trigger.dataset.gallerySource ?? '';
+      const itemSourceUrl = trigger.dataset.gallerySourceUrl ?? '';
+
+      lightbox.dataset.loading = 'true';
+      image.alt = trigger.dataset.galleryAlt ?? '';
+      caption.textContent = itemCaption;
+      caption.hidden = !itemCaption;
+      sourceLink.href = itemSourceUrl;
+      sourceLink.textContent = itemSourceLabel || itemSourceUrl;
+      sourceLink.hidden = !itemSourceUrl;
+      sourceText.textContent = itemSourceLabel;
+      sourceText.hidden = !itemSourceLabel || Boolean(itemSourceUrl);
+      source.hidden = !(itemSourceLabel || itemSourceUrl);
+      details.hidden = !(itemCaption || itemSourceLabel || itemSourceUrl);
+
+      currentIndex = index;
+      if (!lightbox.open) {
+        lightbox.showModal();
+        window.scrollTo(scrollX, scrollY);
+        close.focus({ preventScroll: true });
+      }
+
+      void loadImage(itemSource);
+    };
+
+    triggers.forEach((trigger, index) => {
+      trigger.addEventListener('click', () => {
+        openItem(index);
+      });
+    });
+
+    close.addEventListener('click', () => lightbox.close());
+    previous.addEventListener('click', () => {
+      if (multipleItems) openItem((currentIndex - 1 + triggers.length) % triggers.length);
+    });
+    next.addEventListener('click', () => {
+      if (multipleItems) openItem((currentIndex + 1) % triggers.length);
+    });
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) lightbox.close();
+    });
+    lightbox.addEventListener('keydown', (event) => {
+      if (!multipleItems) return;
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        openItem((currentIndex - 1 + triggers.length) % triggers.length);
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        openItem((currentIndex + 1) % triggers.length);
+      }
+    });
+    lightbox.addEventListener('close', () => {
+      imageRequestId += 1;
+      image.removeAttribute('src');
+      image.removeAttribute('width');
+      image.removeAttribute('height');
+      delete lightbox.dataset.loading;
+      opener?.focus({ preventScroll: true });
+      window.scrollTo(scrollX, scrollY);
+    });
+  });
+</script>

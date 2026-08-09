@@ -1,0 +1,47 @@
+---
+import type { MarkdownHeading } from 'astro';
+import type { WikiLocale } from '../lib/config';
+import { t } from '../lib/i18n';
+
+interface Props {
+  locale: WikiLocale;
+  headings?: MarkdownHeading[];
+}
+
+const { locale, headings = [] } = Astro.props;
+const strings = t(locale);
+const visibleHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
+const sections: Array<{ heading: MarkdownHeading; children: MarkdownHeading[] }> = [];
+
+for (const heading of visibleHeadings) {
+  if (heading.depth === 2 || sections.length === 0) {
+    sections.push({ heading, children: [] });
+  } else {
+    sections.at(-1)?.children.push(heading);
+  }
+}
+---
+
+{
+  sections.length > 0 && (
+    <nav class="table-of-contents" aria-label={strings.contents} data-pagefind-ignore>
+      <p class="toc-title">{strings.contents}</p>
+      <ol>
+        {sections.map((section) => (
+          <li>
+            <a href={`#${section.heading.slug}`}>{section.heading.text}</a>
+            {section.children.length > 0 && (
+              <ol>
+                {section.children.map((heading) => (
+                  <li>
+                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

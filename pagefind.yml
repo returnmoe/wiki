@@ -1,0 +1,8 @@
+site: dist
+output_path: dist/pagefind
+root_selector: '[data-pagefind-body]'
+exclude_selectors:
+  - '.pagefind-data'
+  - '.article-actions'
+  - '.report-link'
+  - '.article-categories'

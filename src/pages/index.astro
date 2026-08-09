@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import HomePage from '../components/HomePage.astro';
+
+const articles = (await getCollection('articles')).filter(
+  (article) => article.data.locale === 'en',
+);
+const categories = (await getCollection('categories'))
+  .filter((category) => category.data.locale === 'en')
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<HomePage locale="en" articles={articles} categories={categories} />

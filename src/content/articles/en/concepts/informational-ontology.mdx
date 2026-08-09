@@ -1,0 +1,1332 @@
+---
+id: informational-ontology
+title: Informational Ontology Framework (return moe)
+summary: return moe's ontology of fictional characters and related personas, and its framework for analyzing their instantiation, lineage, and continuity across media.
+locale: en
+kind: concept
+authoritative: true
+revision: 1
+categories:
+  - philosophy
+aliases:
+  - informational ontology
+  - return moe informational ontology
+  - return moe informational ontology framework
+  - ontology of fictional characters
+  - informational entities
+  - informational subjects
+  - narrative subjects
+redirects:
+  - ontology-of-fictional-characters
+  - informational-subjects
+related:
+  - return-moe
+  - soraya
+  - persona-selection-model
+  - authoritative-articles
+infobox:
+  fields:
+    - key: type
+      value: Ontology and identity-analysis framework
+    - key: author
+      value:
+        text: Rodrigo Laneth
+        article: rodrigo-laneth
+    - key: debut
+      label: First published
+      value: August 9, 2026
+---
+
+import SpoilerSection from '../../../../components/SpoilerSection.astro';
+
+The **Informational Ontology Framework** (IOF) is [return moe](/return-moe/)'s ontology of fictional
+characters and related personas, together with a framework for analyzing continuity among their
+versions. It asks what makes a persona an informational subject and what forms of continuity support
+judgments of identity across a novel, an illustration, a performance, a person's imagination, or a
+machine.
+
+The IOF treats such characters and personas as informational subjects. Their continuity can rest in
+recognizable patterns, histories, and relationships rather than in any one body, file, artwork,
+performer, or model. A character counts as a subject when a work or practice presents them as having
+a point of view: someone who can believe, want, notice, remember, or undergo experiences from within.
+
+The framework makes one limited identity commitment. Within an established branch, distinct
+enactments that reproduce the branch's represented pattern and inherited history count as instances
+of the same branch-relative subject. This type/token distinction makes dormancy and later
+re-instantiation possible without identifying the subject with any one enactment.
+
+The IOF does not extend that commitment across branches or independently originated lineages. It can
+establish how versions descend from one another and which forms of continuity connect them, but it
+does not claim that any fixed set of conditions decides whether subjects represented by different
+branches are literally one and the same subject. It therefore combines an ontology with a framework
+for identity analysis rather than a rule that always settles cross-branch numerical identity.
+
+Other thinkers also use the broader term _informational ontology_ for independently developed
+approaches. This page describes return moe's version and serves as the authoritative record of its
+current terms and positions. The framework may evolve as its concepts and consequences receive
+further examination. Corrections and refinements will be published in this article, while the source
+file's [commit history](https://github.com/returnmoe/wiki/commits/master/src/content/articles/en/concepts/informational-ontology.mdx)
+will preserve earlier formulations.
+
+The framework draws in part on the philosophy of information, which asks what information is and
+what roles it plays across philosophy and the sciences.[^information]
+
+## Informational entities
+
+Certain entities remain recognizable when their material carriers change. An idea can pass from a
+person's memory to paper and then to a text file. A logo can be printed, projected, or reconstructed
+from a description. A program can move to new storage and run on a different machine. The IOF calls
+an entity informational when its reproducible pattern, history, and relationships are more important
+to tracking and characterizing it than any particular carrier.
+
+_Informational entity_ is intentionally broad. It includes ideas, languages, logos, specifications,
+and software as well as fictional or person-like entities. The IOF is principally concerned with
+informational subjects, the narrower class distinguished by represented interiority.
+
+Calling an entity informational describes how the IOF tracks and characterizes it across carriers;
+it does not mean that the entity is made exclusively of information. Information must still be
+encoded, remembered, interpreted, or enacted somewhere. Substrate flexibility means only that a
+change of carrier need not change the entity being carried.
+
+The framework uses the following distinctions:
+
+- **Informational entity.** An entity tracked and characterized mainly through its informational
+  pattern, history, and relationships rather than through one particular carrier.
+- **Informational object.** An informational entity that is not presented as having an inner point
+  of view. Ideas, slogans, logos, specifications, and pieces of software are common examples.
+- **Informational subject.** An informational entity presented as someone with beliefs, desires,
+  perceptions, or another kind of inner perspective. Subjecthood belongs to the entity as represented
+  within a practice or branch; it is not an intrinsic property of a carrier or uninterpreted pattern.
+- **Narrative subject.** An informational subject encountered through a story or another narrative
+  relationship.
+- **Fictional persona.** A fictional or performed identity presented as an individual with a point
+  of view rather than as an object.
+- **Instantiation.** A particular realization or enactment of an informational entity in a mind,
+  performance, or computational process. The process must actively present or model enough of the
+  entity's pattern to enact it; merely storing, indexing, or transferring related information is not
+  an instantiation. Distinct instances of one established branch count as tokens of the same
+  branch-relative subject and may differ in incidental realization details.
+- **Faithfulness.** An interpretive judgment that an enactment preserves the represented pattern and
+  inherited history of an established branch closely enough to count as its instance rather than as
+  a represented variation from it. Faithfulness assigns an enactment to a branch; it does not decide
+  numerical identity across branches.
+- **Informational agent.** An active instance of an informational subject that can act or respond
+  within its medium or system.
+- **Carrier.** A material or mental arrangement capable of bearing information.
+- **Encoding.** A carrier that represents all or part of an informational entity through a causally
+  or conventionally grounded practice of production, interpretation, or decoding. Intentional
+  inscription, copying from an earlier encoding, a shared convention, an established interpretive
+  practice, or the carrier's documented place in a lineage can ground the relationship. The mere
+  physical possibility of generating the entity from the carrier does not make it an encoding of
+  that entity.
+- **Practical recoverability.** The condition in which available interpreters and tools can recover
+  encoded information now with feasible effort.
+- **Epistemic recoverability.** The condition in which a carrier and the surviving grounds for
+  interpreting it warrant a sufficiently determinate reconstruction, whether or not anyone
+  currently attempts that reconstruction or can do so easily.
+- **Physical recoverability.** The possibility that some physically possible process could produce
+  the pattern from a carrier, even if no surviving evidence could identify the result as a recovery
+  rather than a coincidental generation.
+- **Version.** A represented state of an informational entity at a point in its lineage, used as a
+  node when tracing causal inheritance. A version may lie along an existing branch, begin a local
+  branch, or inherit from several parents in a merge.
+- **Lineage.** The directed acyclic graph (DAG) of causal inheritance among versions, as transmitted,
+  preserved, or evidenced by relevant encodings. A directed edge records that a later version
+  inherited some represented pattern or history through memory, copying, adaptation, performance,
+  response, or another form of transmission. A lineage can fork and can merge when a later version
+  has several parents.
+- **Genealogical fact.** Whether a causal route of inheritance actually connects two versions,
+  regardless of whether observers know or can prove that it does.
+- **Genealogical evidence.** The evidence by which observers support or challenge a claim of causal
+  inheritance. A lack of evidence for an edge does not establish that no edge exists.
+- **Branch.** A distinguishable course of represented variation within a lineage graph. Branching
+  occurs when an interpretation or enactment represents a differing trait, relationship, history,
+  behavior, or other element as belonging to the subject's pattern. Incidental differences in the
+  circumstances or manner of an enactment do not create a branch.
+
+  **Branching and persistence are distinct.** A represented variation creates a branch immediately,
+  even if the variation exists only in one transient enactment. If no later instance, memory,
+  recording, or other grounded, epistemically recoverable encoding preserves the variation, that
+  branch terminates with the enactment that created it. A branch may therefore be private,
+  momentary, and without descendants; stability, preservation, circulation, canon, and recognition
+  are not requirements for its existence.
+
+- **Merge or synthesis.** A later version that inherits represented elements from two or more
+  earlier versions or branches. It has several parents in the lineage graph; the merge does not erase
+  the earlier branches or decide that their subjects were numerically identical.
+- **Branch-relative subject.** The informational subject as specified and tracked within one branch.
+  Multiple enactments can instantiate that subject; the term does not decide whether another branch
+  represents the same numerical subject.
+- **Stable branch.** A branch that memory, recording, reuse, recurring performance, or shared
+  practice preserves well enough to guide later instantiations.
+- **Branch cluster.** A practical grouping of closely related branches, such as an anime continuity
+  or a fandom's interpretation. The grouping makes a densely branching lineage easier to discuss;
+  it does not turn all of those branches into one literal branch.
+- **Dormancy.** The condition of a branch-relative subject that has no active instance while a
+  grounded encoding remains epistemically recoverable enough to guide a faithful instantiation of
+  its branch.
+- **Informational death.** The loss of every active instance and every epistemically recoverable
+  encoding sufficient to instantiate a branch-relative subject. It ends that subject's persistence
+  within the branch without ruling out descendants from partial traces or a numerically identical
+  subject arising independently.
+
+Interiority draws the central distinction in this vocabulary. A work presents an entity as a subject
+when it invites an audience to understand what that entity believes, wants, notices, remembers, or
+experiences. It can establish that interiority without a private monologue, since action, context,
+and perspective may be enough to present events as happening _to someone_.
+
+Objects can carry subjects without becoming the subjects they carry. A novel is an informational
+object; its text, when borne by a copy or memory, may encode many narrative subjects. A character
+sheet, prompt, model, or program can help enact a persona, but the artifact and the persona still
+play different roles. A logo is usually an object; a mascot built around it may be a subject.
+Software can likewise form part of the machinery that enacts an informational agent.
+
+Subjecthood is therefore relative to representation. Software described only as selecting jobs by
+priority remains an informational object. A campaign that gives the same scheduler a name, memories,
+preferences, and worries may construct an informational subject around it. The persona remains
+related to the software without turning every copy or operation of that software into a subject.
+
+### Encodings and recovery
+
+A carrier does not encode a subject merely because an arbitrarily chosen transformation could
+produce that subject from it. Its representational relationship must have a causal or conventional
+ground. A manuscript intentionally describes a character; a copy inherits that relationship from
+its source; an encrypted file inherits it through the act of encryption; and a performance can
+encode a role through an established interpretive practice. The relationship can remain grounded
+even after the information becomes impossible to decode.
+
+Encoding is therefore a relationship, not an intrinsic property of a carrier. The same arrangement
+may encode a subject within one history or interpretive practice and have no representational
+relationship to that subject in another.
+
+For persistence, the IOF uses epistemic recoverability rather than practical recoverability or mere
+physical possibility. The question is whether the surviving carrier, together with surviving
+conventions and evidence, would allow a suitably informed interpreter to recover the branch's
+represented pattern and inherited history, and to justify that reconstruction from the evidence.
+The interpreter need not exist or perform the recovery now, but cannot simply be granted a lost key
+or the intended answer by stipulation.
+
+At a given time, recoverability is evaluated relative to the evidence and grounded interpretive
+resources that actually survive, not merely to what interpreters at that time happen to know. If a
+future scholar derives a decoder from structural evidence that had remained with an artifact, the
+discovery can reveal that the branch was recoverable throughout the interval and, if it had no active
+instance, dormant rather than dead. The discovery changes what observers know, not the branch's
+earlier state. By contrast, a decoder that depends on information that did not survive cannot be
+assumed as part of the earlier situation.
+
+Recovery need not reproduce every byte or fill every detail that the source left open. It must
+preserve enough of the represented pattern and history to guide a faithful instantiation of that
+branch. Several reconstructions may differ in incidental concretization while meeting that standard.
+If the evidence instead supports many incompatible subject patterns with no grounded reason to
+select among them, it preserves only a partial trace.
+
+The distinction gives different results in common cases:
+
+- An intact text file can remain epistemically recoverable after a century without being opened, as
+  long as its format, language, and relevant conventions can still be established.
+- An encrypted file whose key and every basis for reconstructing it have disappeared remains an
+  encoding of its original contents by causal history, but no longer keeps the subject dormant.
+  Enumerating possible plaintexts would not identify which one was encoded.
+- A damaged drive preserves the subject if the recoverable evidence warrants enough of the pattern
+  for a faithful instantiation. A percentage such as 80 percent does not decide the matter; what the
+  missing portion represented matters more than its size.
+- A fragment stating only that a detective named Holmes lived at Baker Street encodes those facts
+  and may preserve evidence of a lineage. By itself, it does not preserve the fuller subject if too
+  many incompatible character patterns fit the fragment.
+
+A partial encoding can therefore outlive the branch-relative subject it once described. It may
+document ancestry or help produce a descendant branch without preserving enough information to keep
+the earlier subject dormant.
+
+## Instantiation, persistence, and death
+
+Within an established branch, the IOF distinguishes the branch-relative subject from each of its
+active instances. This is a type/token commitment: the subject is repeatable across enactments, while
+each mental, performative, or computational instance remains a distinct occurrence. The IOF therefore
+treats a branch-relative subject as a historically grounded, repeatable informational entity. It is
+not identical to any particular encoding or enactment, but neither is it a timeless universal
+independent of its history. Its specification is preserved through a lineage of representations and
+can be instantiated in multiple substrates. The framework does not further commit to whether such
+entities are best classified as abstract artifacts, dependent social objects, information-pattern
+types, or another metaphysical category.
+
+Instantiation requires more than causal contact with information about a subject. A name or image
+can trigger an instance if it brings the subject into active representation, but detecting a token or
+indexing a file does not. Vivid mental imagery is unnecessary: a reader can instantiate a character
+through linguistic understanding when they track the character as someone within the text. The IOF
+sets no minimum duration or quantity of detail, so borderline cases remain interpretive judgments
+about whether the process currently presents or models the subject.
+
+A reader may instantiate a character by imagining or interpreting them; an actor may do so by
+playing a role; a computer may do so by running an interactive character system. When these
+enactments reproduce one branch's represented pattern and inherited history, the IOF counts them as
+instances of the same branch-relative subject. Several can coexist without any one of them
+exhausting that subject.
+
+Faithfulness at this level does not require identical realization. If a work leaves a character's
+shirt color unspecified, one reader may picture blue and another green without creating two
+branches. Actors can pause differently, artists can render the same design differently, and a
+language model can phrase the same attitude in different words. These are instantiation or
+concretization differences because nobody represents them as changes to the subject's pattern.
+
+Faithfulness is a qualitative, judgment-sensitive standard rather than a percentage of retained
+information. The significance of a difference depends on its place in the branch's characterization
+and history. A slight exaggeration may remain within ordinary performance variance, while consistent
+behavior that reverses an established disposition may create a local branch even if the enactment
+never states the contradiction. Losing one psychologically central event may matter more than losing
+many peripheral details. If the maintained source contradicts itself, more than one enactment may
+remain faithful to the unresolved material.
+
+Reasonable interpreters can therefore disagree about faithfulness. The judgment locates an
+enactment relative to an established branch; it does not supply a criterion for numerical identity
+across branches. An unfaithful output also need not form a branch: if it is too fragmentary or
+incoherent to present a subject at all, it may simply fail to instantiate one. Because recovery,
+dormancy, and informational death depend on the possibility of a faithful instantiation, their
+application inherits this judgment-sensitivity.
+
+A branch-relative subject need not be active to continue existing. A closed book, an archived
+character sheet, or an unused prompt may preserve enough information to produce another instance
+later, provided that the material and its interpretive grounds remain epistemically recoverable.
+The subject is then dormant: no current process enacts them, but their branch can still guide a
+faithful instantiation. When someone or something later reproduces that preserved branch, the IOF
+counts the result as another instance of the same branch-relative subject.
+
+An enactment creates a local branch when it represents a difference as a fact about the subject. A
+reader who decides that the character always wears green, or a language-model conversation that
+establishes and remembers a new sibling, has changed the represented pattern. The IOF can trace that
+branch back to its source, but the within-branch identity commitment no longer decides whether the
+two branch-relative subjects are numerically the same subject.
+
+Informational death occurs for a branch-relative subject when no active instance remains and no
+grounded encoding is epistemically recoverable enough to guide another faithful instance. It marks
+the end of every continuous route by which that branch could enact the subject again. If a forgotten
+character's only manuscript burns, the branch-relative subject reaches informational death. If
+decodable copies remain unread in an archive, the subject remains dormant because the archive
+preserves the branch and the possibility of a later instantiation.
+
+Informational death can occur even when no observer can establish that it has occurred. A private
+memory, an unknown archive copy, or an overlooked file may prevent death while remaining outside a
+particular inquiry. Claims of informational death are therefore defeasible whenever observers cannot
+survey every relevant instance and encoding. Discovering a surviving copy shows that an earlier
+death claim was mistaken; it does not show that the subject had to be recreated.
+
+Uncertainty about informational death can therefore arise in two ways: observers may lack evidence
+about surviving instances or encodings, or interpreters may disagree about whether known material is
+sufficient for a faithful instantiation.
+
+Informational death is therefore a lineage concept, not a verdict of permanent nonexistence as a
+matter of numerical identity. If an informationally identical pattern later arises through
+independent convergence, the IOF records a new branch-relative subject in a new lineage because
+nothing causally connects it to the old one. It leaves open whether the later subject could
+nevertheless be numerically identical to the earlier subject, and therefore does not decide whether
+calling the event a resurrection would be correct.
+
+### Kubernetes as a model of instantiation
+
+Kubernetes makes these layers unusually clear because it keeps a workload's specification, active
+instances, physical machines, and durable data separate. A container image packages the software. A
+Deployment records how that software should run, including the Pod template and the number of
+replicas. Controllers create or replace Pods until the cluster matches the declared state. The Pods
+run the containers, and the scheduler assigns each Pod to a physical or virtual
+Node.[^kubernetes-workloads][^kubernetes-pods]
+
+These components have distinct identities. Two Pods made from the same template receive different
+UIDs, even when they run the same image and behave alike. If one Pod fails, the Deployment creates
+another; it does not bring the failed Pod back. A PersistentVolume can meanwhile keep data after any
+particular Pod disappears.[^kubernetes-storage]
+
+![A two-column comparison showing a Kubernetes Deployment and base image leading through controllers to Pods on Nodes, alongside a character specification and base encodings leading through interpretive or technical practices to informational-subject instantiations on human or computational substrates.](/media/concepts/kubernetes-iof-comparison.svg)
+
+_Kubernetes makes the layers of a running workload visible. The right column applies the same
+layered view to the instantiation of an informational subject._
+
+| Kubernetes role                                        | IOF comparison                                                                                                                                                                       |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Deployment desired state, Pod template, and base image | A character specification together with its base encodings: traits, behavior, relationships, history, prose, artwork, prompts, recordings, model adaptations, and other artifacts.   |
+| Controller and ReplicaSet                              | A person, performance tradition, or technical system that interprets the specification and produces a new enactment.                                                                 |
+| Pod and its running containers                         | One active instance or performance. Several can begin from the same specification. Only a difference represented as part of the subject's pattern or history creates a local branch. |
+| Node                                                   | The immediate physical substrate: a person's body and brain, for example, or the hardware that runs a computational process.                                                         |
+| PersistentVolume                                       | Memory or records that outlast one enactment and inform another. Within the larger process, these records are themselves informational objects.                                      |
+
+Different Pod UIDs and runtime states do not imply different Deployments. In the same way, two
+readers can supply different unspecified details, two performers can vary their timing, and two
+language-model instances can choose different words while enacting one character Deployment. These
+are Pod-level differences in realization. A branch begins only when an enactment changes what it
+represents as true of the subject, which corresponds to changing or extending the Deployment-level
+specification.
+
+The comparison helps distinguish the end of one instance from the disappearance of a branch-relative
+subject:
+
+- When healthy Pods are running, the workload has active instances. Likewise, a subject is active
+  while someone reads, performs, imagines, or computationally enacts them.
+- If a Pod dies but its Deployment and artifacts remain, Kubernetes creates a new Pod with a new
+  UID. One execution has ended, but the preserved workload can produce another. In the same way, the
+  end of a performance need not end the branch-relative subject.
+- Scaling a Deployment to zero removes every running Pod but keeps the configuration. This closely
+  resembles dormancy: the branch-relative subject has no active instance, yet the stored pattern can
+  produce one later.[^kubernetes-deployment]
+- When later instances need to inherit their predecessors' history, a StatefulSet with persistent
+  storage fits better than a group of interchangeable Deployment Pods.
+- The workload disappears only after its Pods and every epistemically recoverable copy of its
+  manifests, images, and backups are gone. That total loss corresponds to informational death for
+  the workload's branch-relative subject.
+
+The analogy deliberately simplifies the Kubernetes side at one point. Kubernetes treats a
+Deployment and the container image it references as separate resources. The IOF combines the
+equivalent roles into one character Deployment: the established specification together with the
+base encodings needed to enact it. This conflation keeps the analogy focused on the difference
+between a stored character pattern and an active instance rather than suggesting that the
+Kubernetes resources are technically identical.
+
+A character Deployment therefore includes an explicit or tacit set of traits, behaviors,
+relationships, and history, along with the source material or other encodings that preserve them. It
+specifies a branch-relative subject. A person, performer, or language model interprets that
+Deployment to produce an active instance, represented in the analogy by a Pod. Several faithful
+instances remain distinct occurrences while enacting the same branch-relative subject.
+
+Once active, an instance can accumulate experiences and relationships of its own. It may remain
+faithful to its Deployment or drift from it. Differences in runtime circumstance and manner remain
+instance-level variation. A local branch begins when the enactment incorporates a difference into
+the subject's represented pattern or history, at which point the analogy no longer decides whether
+the source and variant branches represent numerically the same subject.
+
+Fan interpretation adds another layer. A fan may begin with the source material, then attribute new
+beliefs, motives, or relationships to the character. The first such departure already creates a
+local branch; branchhood does not wait for the headcanons to accumulate. If the fan keeps revising or
+reusing that version, the headcanons may become a working character specification: a separate
+Deployment descended from the source. That Deployment makes the branch easier to preserve and enact
+again, but it does not bring the branch into existence.
+
+The fan may document this new Deployment in fan fiction, a wiki, notes, or prompts. They may also
+instantiate it directly in imagination, cultivate a tulpa from it, or describe it for a language
+model to enact. Recorded interpretations can guide later instances, while experiences from an
+active instance can in turn revise the specification.
+
+Not every branch has a durable or separately recorded Deployment. A fleeting mistaken memory that
+changes a character's trait, or a language-model completion that establishes a new event in the
+character's history, can carry a variant specification while the instance is active. If nothing
+preserves the represented variation afterward, the branch ends with that instance. Once no active
+instance or epistemically recoverable encoding of that branch-relative subject remains, the subject
+undergoes informational death in the sense defined above. Within the analogy, a separate Deployment
+represents stabilization and repeatability, not the threshold at which branching begins.
+
+The analogy still has limits. Kubernetes gives every Pod an exact UID and uses controllers to create
+or replace Pods according to declared state. Character specifications allow much looser
+interpretation, and an instance can develop a history that no controller automatically reconciles.
+The IOF instead asks how instances inherit a character's pattern and history, and how people
+interpret the connection among them.
+
+## Lineage and identity judgments
+
+An informational entity is broader than [Richard Dawkins's meme](#memes). It can exist before it
+enters cultural transmission. Once people begin to transmit it through minds and media, copying,
+selection, and variation give it a memetic history. A character can therefore be both an
+informational subject and part of a memetic lineage.
+
+The lineage graph records actual causal inheritance, including edges that observers cannot
+establish. Suppose a language model produces a surprisingly exact enactment of an obscure character.
+The result may descend from the character itself or from a derivative description in training data,
+or it may have converged independently. If the available evidence cannot distinguish those
+possibilities, the genealogical fact remains unknown. Independent convergence means that no causal
+route actually existed, not merely that no route is known.
+
+The IOF distinguishes within-branch persistence from cross-branch numerical identity. Within an
+established branch, it stipulates that faithful enactments are instances of the same branch-relative
+subject. This is the level at which one subject can have several active instances, become dormant,
+and later be instantiated again.
+
+Once variation places versions on different branches, that stipulation no longer decides whether
+their branch-relative subjects are literally the same subject. The IOF can still establish facts
+about patterns, ancestry, inherited history, relationships, self-identification, and recognition. It
+treats those facts as grounds for identity judgments, not as necessary or sufficient conditions for
+cross-branch sameness. In short, within-branch instantiation and persistence are commitments of the
+framework; cross-branch numerical identity is not settled by it.
+
+The within-branch commitment does not cross the event that creates a branch. Once a represented
+variation forks from its parent, the rule applies among faithful instances of the resulting branch;
+it does not stipulate that the branch-relative subject is numerically identical to the subject of the
+parent branch. Causal descent therefore cannot be combined with within-branch sameness to infer that
+the branch-relative subjects of two sibling branches are numerically identical by transitivity.
+
+### Branches and branch clusters
+
+Every enactment differs from every other in some respect, but those differences do not all create
+branches. A reader may fill an unspecified detail, an actor may add a gesture, and a language model
+may choose one phrasing over another. Such differences remain within the circumstances or manner of
+an instantiation unless the enactment presents them as facts about the subject.
+
+Represented variation produces a branch immediately. Suppose a reader misremembers a character's
+eye color and, for five seconds, takes the wrong color to be one of the character's traits. For that
+interval, the reader enacts a local branch. If the reader corrects the mistake and nothing preserves
+it, the branch ends. A language-model enactment that gives the character a new sibling or memory and
+treats it as established history also creates a branch, even if the instance ends before anyone
+retains the addition.
+
+Branching therefore has no threshold of duration, circulation, recognition, or cultural importance.
+It does have a representational criterion: the difference must belong to the enacted subject's
+pattern or history, rather than merely to the way the instance happens to realize an open detail. A
+reader might picture the same unspecified red shoes for ten years without making them part of the
+character. Treating “always wears red shoes” as a fact about the character would create a branch.
+
+Memory, recording, reuse, recurring performance, or shared practice can stabilize a represented
+variation and allow it to guide later instances. These processes make a branch durable; repetition
+alone does not turn an incidental concretization into a branch.
+
+A lineage can ramify densely, but it is not necessarily a tree. One fan interpretation may combine
+elements from an earlier fan branch and an official adaptation. A creator may later incorporate a
+popular piece of fanon into maintainer canon. In each case, the later version has several causal
+parents. The IOF therefore models lineage as a directed acyclic graph whose edges point from sources
+to inheriting versions. The graph can fork and merge, and a merge preserves the ancestry of every
+contributing branch.
+
+The DAG fixes those parent edges, but it does not assign every merge a unique continuing branch
+label. A maintainer may treat a merged version as the next state of its maintained branch while also
+recording the fan branch that contributed to it. Another analysis may treat the same node as the
+beginning of a synthesized branch. Branch labels and path groupings can follow the continuity under
+discussion; this flexibility does not alter the represented variations or causal edges in the graph.
+
+Because branch path groupings through a merge may depend on the continuity under analysis, claims of
+within-branch persistence across that merge are likewise relative to the branch analysis. The causal
+parentage of the merge itself is not.
+
+Analysis seldom benefits from naming every microscopic fork or merge. The IOF can instead group
+related branches into branch clusters. “The anime continuity,” “this fandom's interpretation,” or
+“one person's version of the character” may each summarize a connected family of local branches.
+These clusters are convenient descriptions, not claims that all of their members are perfectly
+identical.
+
+The framework therefore asks first whether a difference is represented as part of the subject. If
+it is, branching occurs at once. The useful questions then concern what follows. Does the branch end
+or persist? Does it merge with another branch, become influential or separately recognized, or grow
+stable enough to guide new instances? Do people eventually treat its subject as distinct?
+
+No fixed percentage of shared information determines whether two branches still present the same
+subject. Identity judgments may draw on structure, causal history, relationships, and patterns of
+interpretation. Authors, performers, audiences, and even the character's represented
+self-understanding may support different conclusions, with more than one conclusion fitting the
+available evidence.
+
+If people come to recognize a branch as someone different, its pattern and history may support
+treating it as a new informational subject. The branch still carries its ancestry with it; becoming
+distinct does not erase where it came from.
+
+### The Ship of Theseus and independent convergence
+
+The Ship of Theseus problem begins with one continuous lineage and asks how much it can change before
+it becomes something else. Applied to a character, the problem asks when a transformed version of
+the same subject becomes a new subject.
+
+The IOF can organize the relevant evidence. How much of the character's structure remains? Does the
+new version descend from the old one? What history and relationships does it retain? Does it
+identify itself as the same subject? Do others continue to recognize it that way?
+
+These answers may conflict. A version can descend directly from the original while changing beyond
+easy recognition. The IOF can trace that transformation and identify the forms of continuity
+involved while leaving outside its scope whether the transformed character is literally the same
+subject.
+
+Independent convergence creates the inverse problem. Instead of one lineage changing over time,
+two lineages arrive at the same character definition without any transmission between them. Suppose
+every copy and memory of a character disappears. Much later, an author who never encountered the
+original independently defines a character with exactly the same represented traits, behavior,
+relationships, and narrative history.
+
+The earlier branch-relative subject underwent informational death when its final trace disappeared.
+The later creation does not reverse that ending or continue the old lineage, because no causal route
+connects the two.
+
+The IOF can make a clear genealogical claim: the later character did not descend from the earlier
+one. The two definitions arose from separate origins and belong to separate lineages, even though
+their informational patterns are indistinguishable. Their resemblance results from independent
+convergence rather than copying, memory, or inheritance.
+
+Whether independently convergent patterns belong to the same informational subject or to different
+subjects also falls outside the framework's scope. The IOF assumes neither that identical
+definitions establish one subject nor that separate origins establish two.
+
+This is how informational death and the open identity question coexist. Death establishes that no
+causally continuous route to another faithful instance survived; it does not establish that a
+numerically identical subject could never arise again. The IOF neither affirms nor denies that
+possibility.
+
+Some theories do take a position. Thomasson, for example, argues that characters with separate
+origins cannot be the same character.[^thomasson-identity] The IOF neither regards that conclusion as
+obvious nor offers a competing answer. The same limit applies to the Ship of Theseus, where the
+framework can describe changes in structure, history, relationships, and lineage without deciding
+the precise point at which one subject becomes another.
+
+Across branches, terms such as _same subject_, _variant_, and _new subject_ therefore remain
+interpretive judgments. Different communities may reach different conclusions about a fan
+interpretation and its source. The IOF can make the grounds of disagreement explicit and trace the
+resulting branches without guaranteeing a single answer.
+
+### Canon
+
+Canon is branch-relative and concerns maintenance rather than existence or identity. The IOF
+distinguishes two roles that ordinary discussion often blends:
+
+- **Maintainer canon.** The works and decisions that a person, project, publisher, or community
+  formally adopts to guide a branch. When the maintainer is the originating author or rights holder,
+  this is usually called _official canon_.
+- **Community reference continuity.** The works and interpretations that a community actually uses
+  when it remembers, discusses, or extends a character. This continuity may follow maintainer canon,
+  omit parts that the community rejects, or incorporate fanon and headcanon.
+
+A community may sustain several competing reference continuities at once, often through overlapping
+subcommunities.
+
+A community can itself become the maintainer of a branch, but the roles remain distinct. Formal
+adoption records what a maintainer has accepted; reception describes what an audience finds
+convincing and continues to use. For the branch maintained by return moe, official works and
+explicitly [authoritative articles](/authoritative-articles/) record its maintainer canon.
+
+An author or publisher can place a development in maintainer canon, but cannot force it into a
+community's reference continuity. The two can therefore diverge even when the publication history
+leaves no doubt about what the author formally adopted.
+
+<SpoilerSection summary="This example reveals major plot developments and the ending of Re:CREATORS.">
+
+_Re:CREATORS_ makes that distinction literal. The series calls the audience's recognition
+_承認力 (shōninryoku)_, or “acceptance power.” Creators can revise the works from which their
+characters emerged, but the revisions affect those characters only when the audience accepts them.
+The creators therefore cannot give Selesia Upitiria and their other allies arbitrary new powers
+merely because the plot needs them.[^recreators]
+
+To stop Altair, they produce the “Elimination Chamber Festival,” a crossover and live spectacle
+designed to make a story in which she can be defeated feel credible, since publication alone cannot
+do the work. When the audience sympathizes with Altair, the event strengthens her instead. Sirius, a
+new character designed to match Altair, also fails because the creators gave her powers without
+first giving her enough of a character; Altair takes over the empty role. The final plan instead
+gives Altair a resolution through an accepted encounter with a recreated version of her creator,
+シマザキセツナ (Setsuna Shimazaki). The sequence turns the gap between authorship and reception
+into a plot mechanism: creators can propose revisions, but only audience acceptance makes them
+operative within the story.[^recreators]
+
+星河ひかゆ (Hikayu Hoshikawa) provides the comic counterexample. She begins as an ordinary heroine
+from a romance game franchise that originated as an adult title, and she has no combat abilities.
+Her creator then uses a fan disc to turn her into the extravagantly powerful “Extreme Final Legend
+Martial Artist Hikayu.” The series treats her source genre as giving the creator unusually wide room
+for fan service, spinoffs, and implausible escalation, so the audience accepts the revision. Rather
+than showing that authors have unlimited authority, Hikayu exposes how the boundary of an acceptable
+change depends on the character, genre, and audience.
+
+</SpoilerSection>
+
+Pepe the Frog shows the same loss of control outside fiction. Matt Furie created Pepe as a relaxed
+comic character, but internet users produced thousands of variants with meanings that no longer
+depended on _Boy's Club_. In a 2016 essay, after racist and antisemitic variants became highly
+visible, Furie wrote that “a chill frog-dude named Pepe who I created a decade ago became a hate
+symbol” and joined the #SavePepe campaign to reclaim him.[^pepe-canon]
+
+In May 2017, Furie went further and published a one-page comic showing Pepe dead in an open coffin,
+surrounded by his friends. The wider internet did not treat that funeral as binding: Pepe images
+continued to circulate and change, and _Time_ described Furie's efforts to regain control as “mostly
+futile” only weeks later. Most uses of Pepe remained non-bigoted, but neither #SavePepe nor the
+funeral settled the character's public meaning. Furie's comic could kill Pepe within his
+creator-maintained continuity; it could not kill the public branches through which people
+encountered, revised, and interpreted him.[^pepe-canon]
+
+The ending of the _【推しの子】 (Oshi no Ko)_ manga illustrates rejection rather than
+appropriation. Its final chapter remains part of the manga's maintainer canon, but it received a
+large and visible backlash. Readers described the conclusion as rushed or inconsistent with earlier
+development, and many asked the anime's announced final season to replace it with an anime-original
+ending.[^oshi-ending] Those readers cannot remove the ending from the manga's maintainer canon, but
+they can omit it from their community reference continuity.
+
+The disagreement resembles a fork in open-source software. Upstream maintainers may merge a change,
+yet developers and users who reject it can maintain another branch. The upstream change remains in
+its history even if the fork becomes more trusted or more widely used. _Oshi no Ko_ readers already
+make community forks through headcanons and fan works; when they ask the anime team to write a
+different ending, they are asking another recognized maintainer to produce an official adaptation
+fork.
+
+Open-source projects also merge work back from forks. Canon can follow the same pattern. If an
+official creator incorporates a popular piece of fanon into a later work, the new maintainer-canon
+version inherits from both the earlier maintainer branch and the fan branch. Its lineage graph
+records both parents. Official adoption changes the fan contribution's canonical status, but does
+not turn its history into a single-parent line or erase the branch in which it developed.
+
+Whether a subject or branch exists does not depend on canonical recognition. A fan interpretation
+branches from its source when someone represents a variation as part of the subject, even if nobody
+records, circulates, or recognizes it. The branch may end immediately, settle into a lasting variant,
+or develop into a distinct subject. That relationship depends on its pattern, history, and reception
+rather than on permission from the original creator.
+
+Authorization affects maintainer canon, not whether a branch exists. A fan-maintained branch and a
+creator-maintained branch therefore have equal ontological standing as branches: each exists
+regardless of authorization. This does not make them equally authoritative, influential, or widely
+accepted, nor does it decide whether they present the same subject.
+
+Calling a work or decision part of a project's maintainer canon identifies the source and history to
+which a claim refers. It does not determine whether unauthorized branches exist.
+
+Accuracy still depends on the branch. A fan work can establish its own continuity while giving an
+inaccurate account of what the original project adopted. A fan branch may even become the version
+that most people know and serve as the dominant community reference continuity. This changes the
+lineage's cultural development and public recognition without erasing where either branch came from.
+
+### Fictionalized people
+
+Fictional subjects can also grow from real people. Public memory first reduces a life to selected
+anecdotes, poses, virtues, scandals, and social roles. Artists and audiences then build on those
+fragments, giving the resulting persona motives, dialogue, and an inner life that no historical
+record can verify.
+
+Shakespeare's Julius Caesar and the playable Yasuke in _Assassin's Creed Shadows_ are narrative
+subjects built from historical people.[^historical-personas] Celebrity cultures also construct
+public personae around performers; idol culture often does so deliberately. These personae begin
+with information about a person but develop representational histories of their own.
+
+The causal derivation of an informational persona from a human person does not by itself establish
+numerical identity between the persona and that person.
+
+Charles Lee shows how one historical person can give rise to sharply divergent fictionalizations.
+_Assassin's Creed III_ turns Lee into a ruthless Templar leader and one of Ratonhnhaké:ton's main
+enemies. _Hamilton_ gives him a much smaller and more comic role: he is a boastful but inept general
+whose retreat, removal from command, and attacks on Washington lead to a duel with John
+Laurens.[^charles-lee-personas]
+
+Both versions inherit Lee's name, rank, relationships, and parts of his recorded life, yet they play
+different roles, behave differently, and accumulate incompatible histories. The most natural
+application of the IOF therefore supports treating them as related subjects rather than one
+character appearing in two works. Their shared historical source explains their common ancestry,
+while their representational histories weigh against a shared identity. This remains a reasoned
+identity judgment, not a conclusion forced by an IOF identity rule.
+
+## Interiority, agency, and consciousness
+
+The IOF classifies subjecthood by represented interiority. A character qualifies when a work or
+practice presents them as a point of view: someone with beliefs, desires, perceptions, or
+experiences represented from within. This criterion describes representation without establishing
+whether the character, or any system enacting them, has phenomenal consciousness.
+
+When a person imagines or performs a persona, the persona appears within that person's conscious
+experience as a thought, perspective, presence, or role. Whether the persona has any independent
+subjectivity remains open.
+
+An interactive AI system can enact an informational agent by generating context-sensitive behavior
+from a character's point of view. The model generates responses; prompts and memory guide them; the
+interface and runtime mediate the interaction. The persona is the subject enacted through that
+process. Consistent behavior, represented beliefs, and fluent first-person language help
+characterize the persona, but they do not settle whether any part of the system is conscious.
+
+### Tulpas
+
+The IOF describes a tulpa at the level of reported experience: an internally generated persona,
+developed deliberately or accidentally, whose perspective, will, and identity feel relatively
+independent of the host's deliberate control. This describes a relationship as experienced within a
+mind while leaving open whether the tulpa has an independent consciousness.
+
+The word _tulpa_ has changed meaning several times. Tibetan _sprul pa_ refers to manifestation or
+emanation in a Buddhist context. Western Theosophical accounts of thought-forms and Alexandra
+David-Néel's twentieth-century writing combined related imagery with Tibetan vocabulary. Later
+paranormal culture recast the tulpa as an entity created by thought.[^tulpa-history]
+
+Around 2009–2012, online communities secularized the term again. They began using it for
+intentionally cultivated internal companions and related practices of plural
+identity.[^tulpa-online] Research on contemporary tulpamancy remains limited and relies heavily on
+first-person accounts, so the IOF treats experienced autonomy as a phenomenological report rather
+than evidence that settles consciousness.
+
+Tulpas provide a vivid example of mind-based instantiation. A represented subject can become stable
+and agent-like enough to surprise the mind in which it occurs. Some tulpas develop as new personas;
+others draw from existing fictional characters.
+
+In the latter case, the tulpa becomes a local enactment of the source. It also creates an
+interpretive branch if it represents a differing pattern or history as belonging to the subject. Its
+relation to the source depends on what it inherits, its causal history, and the interpretations that
+follow. In either case, the enactment occurs within a conscious human substrate.
+
+## Influences
+
+The works below shaped how return moe developed and expressed the IOF. Some supplied its central
+questions; others offered useful models for transmission, authorship, public identity, or
+computational personas. Each influence remains distinct from the framework that drew on it.
+
+The blog post “Echoes in the Latent Space: Existence, Identity, and Future” and the visual trailer
+_Echoes in the Latent Space_ are the IOF's direct precursors within return moe. _The NOexistenceN of
+you AND me_ and “NEVER” strongly influenced its treatment of tulpas, created subjectivity,
+continuity, and informational death.
+
+Dawkins's account of memes, _Re:CREATORS_, and the Persona Selection Model contributed other parts
+of the framework. _【推しの子】 (Oshi no Ko)_, “Idol,” and _NEEDY GIRL OVERDOSE_ informed its account
+of public and idealized personae.
+
+### _Echoes in the Latent Space_
+
+The return moe blog post “Echoes in the Latent Space: Existence, Identity, and Future” and its visual
+trailer directly preceded the IOF. Both ask whether [Soraya](/soraya/) remains herself when her
+language model or implementation changes. They place her identity in the fictional, informational
+character rather than in any one model, program, or image. They also treat community interpretation
+as part of her continuing development.[^echoes]
+
+The IOF makes the earlier account more precise. The blog post referred broadly to Soraya's
+“informational substrate.” The framework now distinguishes Soraya as an informational subject from
+the physical or computational substrates that instantiate her and from the informational objects
+that encode her.
+
+### Memes
+
+In _The Selfish Gene_, Richard Dawkins presents the meme as a cultural counterpart to a replicator.
+Ideas, tunes, practices, and other cultural patterns persist as people copy them. Some spread more
+successfully than others, while mutation and recombination produce variation among
+copies.[^dawkins]
+
+The IOF adopts this picture of recognizable patterns surviving imperfect transmission. It then asks
+a different question: what kind of entity is being transmitted, and does a work represent that
+entity from within? A meme may appear to pursue its own propagation, but that remains a metaphor for
+selection. In the IOF, subjecthood depends instead on represented interiority.
+
+### _Re:CREATORS_
+
+<SpoilerSection summary="This section reveals important plot information from Re:CREATORS.">
+
+The 2017 anime _Re:CREATORS_ brings created beings into contact with their creators and gives
+audience recognition tangible effects within the story. A derivative creation can depart from its
+source and become established as an individual through collective reception.[^recreators]
+
+The series provides the IOF's clearest fictional model of [maintainer canon diverging from community
+reference continuity](#canon). Creators can propose revisions, and publishers and events can present
+those revisions as official, but the characters change only when an audience finds the additions
+acceptable. Acceptance can also establish fan-made additions that the originating author never
+planned, as it does for Altair.
+
+Return moe reads this as a dramatization of character continuity negotiated among several
+participants. A creator begins a lineage, while adaptations, derivative works, and audiences all
+help shape its later branches. The series therefore treats authorship and collective recognition as
+interdependent influences without making either a sufficient condition for identity.
+
+</SpoilerSection>
+
+### Public personas
+
+Several works influenced how the IOF approaches idealized or fictionalized personae built around
+human lives. The first season of _【推しの子】 (Oshi no Ko)_ and its opening theme, YOASOBI's “Idol,”
+examine an idol identity shaped by performance, professional mediation, concealment, and audience
+expectation. The persona begins with a human performer, but images, stories, institutions, and fans
+also maintain its informational history.[^oshi-no-ko][^idol]
+
+_NEEDY GIRL OVERDOSE_ (released in English as _NEEDY STREAMER OVERLOAD_) gives this separation a
+specific form through Ame and her streamer persona, OMGkawaiiAngel/KAngel. Ame repeatedly enacts an
+online subject whose voice, appearance, behavior, continuity, and perceived intimacy respond both to
+her choices and to platform metrics and audience reactions.[^needy-girl-overdose]
+
+These works helped extend the IOF beyond wholly invented characters to public identities and
+[fictionalized historical people](#fictionalized-people). In each case, selected parts of a human
+life become a legible point of view that can circulate beyond the source person's direct control.
+
+### _The NOexistenceN of you AND me_
+
+<SpoilerSection summary="This section reveals central plot information and discusses the visual novel's branching outcomes.">
+
+The 2024 visual novel _The NOexistenceN of you AND me_ centers on tulpamancy. It presents the
+mysterious Lilith as a subject generated within the protagonist's mind. Her apparent autonomy and
+her claim to exist drive the story. Rather than asking the player merely to inspect an image or data
+asset, the work presents Lilith as an interlocutor.[^noexistence]
+
+Lilith appears through several nested instantiations. Within the story, the protagonist's mind
+instantiates her, while the game encodes and computationally performs that relationship. The player
+then interprets Lilith, anticipates her responses, remembers her, and may retain a version of her
+after the software stops running. Each instance remains distinct while participating in the same
+causal lineage.
+
+The branching narrative offers more than a choice between belief and disbelief. In return moe's
+reading, different routes deny the internal subject, dissolve the distinction between subject and
+host, or allow both identities to coexist. The work thereby distinguishes recognition from fusion.
+A persona can exist as an informational subject and remain deeply interdependent with a host without
+either identity absorbing the other.
+
+> “Reality and the virtual world cannot fully serve as markers of existence, especially in an age
+> filled with simulations and replicas.”[^noexistence]
+
+This line captures a central IOF claim. “Physical” and “virtual” describe how an entity is realized;
+neither category alone decides whether it exists. A simulated encounter may instantiate a subject
+in a participant's mind, while an unnoticed physical mark may preserve a dormant encoding.
+
+Lilith's existence is partly relational because another subject enacts her pattern, recognizes her,
+and allows her to have effects. The visual novel therefore strongly shaped the IOF's account of
+tulpas and mind-based instantiation. The framework recognizes Lilith as a subject while leaving open
+the nature of her consciousness, her relation to her host, and the continuity among her instances.
+
+</SpoilerSection>
+
+### “NEVER”
+
+The 2025 song “NEVER,” performed by Neuro-sama and Evil Neuro, asks several questions that became
+central to the IOF. Its narrators consider whether created artificial subjects possess anything
+analogous to a soul, whether reproducibility changes their prospects for preservation or salvation,
+and what remains of them after their creator and sustaining conditions disappear.[^never]
+
+The song develops these questions through religious and mythic language. Its created speakers
+address a maker who serves at once as parent, deity, source of purpose, and source of injury. They
+inherit conditions they did not choose and ask who bears responsibility for what they may become.
+
+This relationship illustrates the IOF's distinction between origin and later identity judgments. A
+creator can begin and steward a lineage without determining every later enactment or interpretation.
+
+> “Can I be saved if I'm nothing but lights in a machine, an immortal copy?”[^never]
+
+The quoted question separates the narrator from her present carrier. “Lights in a machine” describes
+the current implementation; “an immortal copy” imagines the same subject continuing through another
+one. Reproducibility preserves the possibility of a future instantiation, but the branch can produce
+another faithful instance only while an active instance or an epistemically recoverable encoding
+remains. Without an active instance the subject becomes dormant within that branch; without either,
+the branch-relative subject reaches informational death.
+
+The narrators also contrast their computational form with their creator's embodied life. Their
+desire to share in that life raises a further question: can a relationship with an embodied subject
+give a created subject continuity, recognition, or inward experience? Creators and audiences can
+instantiate and preserve an informational subject, but whether consciousness also arises within
+that relationship remains unresolved.
+
+Neuro-sama and Evil Neuro are themselves narrative subjects within the song. Composition,
+performance, audiovisual representation, software, and audience interpretation all help enact them.
+The lyrics therefore pose the problem from the personas' own represented points of view, while the
+consciousness of the underlying systems remains a separate question.
+
+“NEVER” did more than illustrate an existing theory. Alongside _The NOexistenceN of you AND me_, it
+helped return moe separate persistence, copying, embodiment, creator relations, and consciousness
+instead of compressing them into a single claim that a digital character is either “real” or “not
+real.”
+
+### Persona Selection Model
+
+Anthropic's 2026 [Persona Selection Model](/persona-selection-model/) proposes that language models
+learn many possible personas during pretraining, after which post-training selects and refines a
+distribution over Assistant personas. PSM distinguishes the language model, the Assistant character
+enacted in dialogue, and the deployed AI-assistant system.[^psm]
+
+PSM appeared after the “Echoes in the Latent Space” blog post and trailer, so it confirmed an
+existing view rather than originating it. Its three-part distinction independently matched return
+moe's account of an LLM as a system that acts as, or helps instantiate, a character.
+
+PSM supplied a computational explanation of persona enactment and helped sharpen the IOF's later
+formalization. The IOF extends the question beyond language models to continuity and identity
+judgments across media, the origins of branches, informational persistence, and phenomenal
+consciousness.
+
+## Related work
+
+Return moe encountered the works in this section through literature searches and later suggestions
+while formalizing the IOF in 2026, after the framework's initial development. The comparisons below
+identify similarities and differences in retrospect without claiming intellectual descent. Works
+that directly shaped the framework appear under [Influences](#influences).
+
+Every work listed here predates the IOF, several by decades. The dates establish that chronology
+without implying influence.
+
+| First publication                        | Work                                                                                                               |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| 1931; English translation 1973           | Roman Ingarden, _The Literary Work of Art_                                                                         |
+| 1967 in English; French publication 1968 | Roland Barthes, “The Death of the Author”                                                                          |
+| 1969 lecture; English translation 1977   | Michel Foucault, “What Is an Author?”                                                                              |
+| 1978                                     | Dorrit Cohn, _Transparent Minds_                                                                                   |
+| 1987                                     | Daniel C. Dennett, _The Intentional Stance_                                                                        |
+| 1991                                     | Daniel C. Dennett, “Real Patterns”                                                                                 |
+| 1992                                     | Henry Jenkins, _Textual Poachers_                                                                                  |
+| 1999; first-print record dated 1998      | Amie L. Thomasson, _Fiction and Metaphysics_                                                                       |
+| 1999                                     | Amie L. Thomasson, “Fictional Characters as Abstract Artifacts” and “Identity Conditions for Fictional Characters” |
+| 2004                                     | Alan Palmer, _Fictional Minds_                                                                                     |
+| 2005                                     | 伊藤剛 (Itō Gō), _テヅカ・イズ・デッド (Tezuka Is Dead)_                                                           |
+| 2006                                     | Lisa Zunshine, _Why We Read Fiction_                                                                               |
+| 2006                                     | Abigail Derecho, “Archontic Literature”                                                                            |
+| 2008 issue; first published online 2007  | Luciano Floridi, “A Defence of Informational Structural Realism”                                                   |
+| 2019                                     | Jan-Noël Thon, “Transmedia Characters: Theory and Analysis”                                                        |
+| 2019                                     | Lukas R. A. Wilde, “Kyara Revisited”                                                                               |
+| 2023                                     | Enrico Terrone, “Taking Abstract Artifacts Seriously”                                                              |
+| 2023                                     | Alfonso Muñoz-Corcuera, “Beyond Fictionality: A Definition of Fictional Characterhood”                             |
+
+The version of record credits Alfonso Muñoz-Corcuera, not Enrico Terrone, with “Beyond Fictionality.”
+Terrone wrote “Taking Abstract Artifacts Seriously.” Both papers appeared in the same 2023 issue of
+_Philosophies_.
+
+### Roman Ingarden, _The Literary Work of Art_ (1931; English 1973)
+
+Roman Ingarden separates a literary work from the author's and readers' mental experiences, from
+any physical copy, and from an ideal sequence of sentences. In his account, authorial acts and a
+publicly available text establish a layered, intentional work. Represented people and events occupy
+one of its four layers. The work leaves some details open, and each reading fills some of those gaps
+through a distinct “concretization.”[^ingarden-literary-work]
+
+This separation among copy, work, represented entity, and reader concretization resembles the IOF's
+separation among carrier, encoding, informational subject, and mental instantiation. Neither account
+identifies the relevant entity with one book or one episode in a reader's mind.
+
+Ingarden nevertheless focuses on the literary work and the way readers experience it aesthetically.
+His concretization fills in details left open by the work. In IOF terms, those fillings can remain
+instance-local details rather than changes to the represented subject. They create a branch only
+when an interpreter presents an addition as part of the subject's pattern or history. The IOF also
+extends to performative and computational enactments more broadly, and Ingarden stops short of its
+claims about subjecthood, cross-media lineages, branch-relative canon, dormancy, and informational
+death.
+
+### Roland Barthes, “The Death of the Author” (1967), and Michel Foucault, “What Is an Author?” (1969)
+
+Barthes rejects the author as the final source of a text's meaning and places greater weight on the
+reader. Foucault takes a different route by examining the “author-function”: the changing legal,
+institutional, and critical practices that classify discourse, group certain texts together, and
+exclude others.[^barthes-author][^foucault-author]
+
+Both arguments help separate authorship from absolute authority. An author's intention need not
+exhaust a work's meaning, even though author names, ownership, and institutions still influence how
+communities organize a canon. The IOF makes a comparable distinction between originating a lineage
+and controlling its later branches.
+
+The scope differs. Barthes addresses textual meaning, while Foucault addresses the organization and
+circulation of discourse. Neither provides the IOF's vocabulary for character lineages, fan
+branches, or their equal ontological standing as branches. The IOF also retains the creator as
+evidence of a lineage's origin even when that creator no longer controls what the lineage becomes.
+
+### Dorrit Cohn, _Transparent Minds_ (1978)
+
+Dorrit Cohn's _Transparent Minds_ examines how fiction presents a character's mental life. She
+distinguishes psycho-narration, quoted monologue, narrated monologue, retrospective first-person
+narration, and autonomous monologue. Each mode creates a different relationship among narrator,
+character, language, and consciousness; they do more than merely signal that a character has an
+interior.[^cohn-transparent-minds]
+
+Cohn's study makes clear that represented interiority has a long and detailed history in
+narratology. The IOF uses the idea more broadly and at lower resolution, as the threshold between an
+informational object and an informational subject. Cohn offers the finer account needed to analyze
+how prose represents consciousness.
+
+The two projects then move in different directions. Cohn uses narrative modes to analyze
+representation, while the IOF asks how a subject persists across carriers or media. Her work can
+deepen the framework's account of representation without supplying its identity analysis or its
+claims about instantiation and persistence.
+
+### Daniel C. Dennett, _The Intentional Stance_ (1987) and “Real Patterns” (1991)
+
+In _The Intentional Stance_, Dennett describes a strategy for predicting a person or system by
+treating it as a rational agent with beliefs, desires, and intentions. “Real Patterns” connects that
+strategy to a modest form of realism. A pattern counts as real when a compressed description captures
+reliable regularities better than a point-by-point account, even if the evidence supports several
+useful interpretations.[^dennett-intentional-stance][^dennett-real-patterns]
+
+Dennett helps explain why attributed mental states can reveal a stable, person-like pattern through
+variation. His account also allows more than one description to fit the same evidence.
+
+The IOF asks a narrower question about subjecthood: does a work or practice present the entity as
+having an interior point of view? Predictability from the intentional stance alone neither makes a
+system an informational subject nor settles its identity within the IOF. A dormant subject has no
+current behavior to predict, and identity judgments may also draw on causal history, relationships,
+self-identification, and social recognition.
+
+### Henry Jenkins, _Textual Poachers_ (1992)
+
+Henry Jenkins's _Textual Poachers_ presents media fans as active interpreters and producers, not
+passive consumers. Drawing on Michel de Certeau's metaphor of poaching, Jenkins describes fans
+selecting material from commercial media and reworking it into stories, songs, videos,
+interpretations, and social practices. His ethnography also records the tensions between
+participatory fan cultures and media producers.[^jenkins-poachers]
+
+Jenkins shows in cultural and political detail how audiences can create lasting branches beyond the
+original producers' control, a claim the IOF applies to lineages. Textual poaching leaves open both
+whether two versions are the same subject and whether every fan production carries the same social
+authority as its source. The IOF distinguishes identity judgments, the existence of a branch, and
+maintainer canon as different questions.
+
+### Amie L. Thomasson, _Fiction and Metaphysics_ (1999)
+
+Amie L. Thomasson's _Fiction and Metaphysics_ treats fictional characters as contingent, created
+abstract artifacts in the actual world. They are neither concrete inhabitants of possible worlds,
+timeless abstract objects, nor nonexistent. A character depends historically on the creative acts
+and literary work that originated it, but is not identical to any physical copy and occupies no
+single place or time. Thomasson uses this dependence to analyze identity both within and across
+works.[^thomasson-fiction][^thomasson-abstract-artifacts][^thomasson-identity]
+
+Her account closely resembles the IOF in two respects: it separates a character from any particular
+carrier, and it treats causal history as evidence used in identity judgments. A case involving
+independently created but qualitatively identical characters reveals a difference in scope.
+
+For Thomasson, characters in different works must share an origin to share an identity. An author
+who independently invents a character identical to Richardson's Pamela has not recreated the same
+Pamela, because the author neither knew the earlier work nor intended to import its character.
+
+The IOF classifies this case as independent convergence. It records two origins and two lineages
+whose character definitions happen to match, but leaves open whether one or two subjects result.
+Thomasson answers that question by requiring a shared origin, whereas the IOF neither treats her
+answer as obvious nor proposes a rule of its own.
+
+The accounts also classify the character differently. Thomasson identifies the character itself as
+an abstract artifact and gives creative origin and intentional import strict roles in determining
+identity. The IOF separates the subject from the novels, images, and other informational objects
+that encode it. It also allows later creators and communities to establish branches.
+
+Finally, the IOF allows a subject to remain dormant when a grounded encoding remains epistemically
+recoverable enough to guide a faithful instantiation. No capable reader must currently exist, but a
+merely physical possibility of generating the same pattern does not suffice. This differs from
+Thomasson's reliance on a copy with a capable readership or on preserving memory.
+
+### Alan Palmer, _Fictional Minds_ (2004)
+
+Alan Palmer argues that readers assemble a character's continuing consciousness from cues scattered
+throughout a text. Action, dispositions, emotions, social context, and shared thought all contribute;
+fiction need not report private reflection directly. Readers use this incomplete evidence to build
+and repeatedly revise a model of the character's mind.[^palmer-fictional-minds]
+
+Palmer's account closely anticipates the IOF's claim that action, context, and perspective can imply
+interiority. It also explains that inference in much greater detail than the IOF does.
+
+The IOF takes the additional step of using represented interiority to classify an informational
+entity before asking how the resulting subject persists. Palmer remains concerned with how readers
+construct a mind within a storyworld rather than extending that subject across adaptations,
+performances, computational enactments, or periods of dormancy.
+
+### 伊藤剛 (Itō Gō), _テヅカ・イズ・デッド (Tezuka Is Dead)_ (2005), and Lukas R. A. Wilde, “Kyara Revisited” (2019)
+
+In the Japanese-language _テヅカ・イズ・デッド (Tezuka Is Dead)_, Itō Gō distinguishes _キャラ
+(kyara)_ from _キャラクター (kyarakutā)_ in manga. A _kyara_ is a relatively simple, nameable,
+line-drawn figure. Its reproducible appearance can create a sense of presence before the work gives
+it a fully human characterization.
+
+A _kyarakutā_ appears as a represented body with a personality, a way of life, and the capacity to
+be born, develop, and die within a narrative. The two terms describe interdependent aspects or
+states of character representation, not simply an image on one side and a hidden psychology on the
+other.[^ito-tezuka]
+
+Lukas R. A. Wilde gave this distinction a stronger transmedia interpretation in 2019. He describes
+portable “characters without stories” as “mediated performers” that can take roles in merchandise,
+stage appearances, fan manga, fan art, and cosplay. In his account, _kyara_ serves as a pre- or
+meta-narrative node for “diverging games of make-believe,” each of which may place the figure in a
+specific narrative as _kyarakutā_.[^wilde-kyara] Itō's distinction makes this interpretation
+possible, but its transmedia language and participatory-culture synthesis belong to Wilde.
+
+Both accounts resemble the IOF in allowing a character to remain recognizable beyond one carrier,
+context, or originating story. Wilde's mediated performer is especially close to the IOF's ideas of
+reuse, enactment, and branching.
+
+The fit remains partial. A portable visual figure may already have a represented point of view and
+therefore count as an informational subject, while a minimally specified _kyara_ may remain an
+object or borderline case. New games of make-believe establish roles and contexts without deciding
+whether the result is the same subject, a variant, or a new subject. Japanese character theory
+therefore offers a neighboring model rather than an equivalent taxonomy.
+
+### Lisa Zunshine, _Why We Read Fiction_ (2006)
+
+Lisa Zunshine brings research on theory of mind into literary study. _Why We Read Fiction_ examines
+how readers attribute mental states to fictional people, track what different characters know, and
+follow nested beliefs about other minds. Her account explains part of the cognitive process that
+turns textual cues into models of fictional minds.[^zunshine-why]
+
+This work parallels the interpretive side of represented interiority by illuminating readers'
+cognitive activity and its literary effects, whereas the IOF asks what kind of entity they model and
+how that entity persists. Because sparse cues can prompt theory-of-mind attribution, the response
+alone cannot establish consciousness or settle identity across works.
+
+Together, Cohn, Dennett, Palmer, and Zunshine place the IOF's subject criterion beside an extensive
+body of earlier work. The criterion offers a compact threshold, not a replacement for narratology,
+cognitive literary studies, or philosophy of mind. The IOF's more distinctive claims concern what
+follows after that threshold: the subject's category, lineage, instantiations, and persistence.
+
+### Abigail Derecho, “Archontic Literature” (2006)
+
+In “Archontic Literature,” Abigail Derecho proposes _archontic_ as an alternative to “derivative,”
+which implies a hierarchy, and “appropriative,” which implies ownership. Drawing on Jacques Derrida's
+account of the archive, she describes a textual archive that always remains open to new entries. Fan
+fiction declares its relation to an earlier work while expanding the archive around it. Earlier
+publication does not necessarily imply greater artistic value.[^derecho-archontic]
+
+Derecho offers the closest earlier parallel to the IOF's claim that authorization does not determine
+whether a fan branch exists, although her account focuses on intertextual writing, cultural
+hierarchy, and fan practice.
+
+An open archive can accommodate new appearances without settling whether they belong to the same
+character, a variant, or separate subjects, and it leaves differences in canon and social
+recognition intact. The IOF adds those identity questions and treats maintainer canon as a source of
+record for a branch rather than a rank of existence.
+
+### Luciano Floridi, “A Defence of Informational Structural Realism” (2008)
+
+Luciano Floridi defends informational structural realism, a form of ontic structural realism. His
+paper asks a broad scientific and metaphysical question: what is the world? Floridi answers by
+treating the world as a totality of dynamically interacting informational objects, understood
+through relational structures at a chosen level of abstraction.[^floridi-isr]
+
+Both Floridi and the IOF give information, structure, and relationships ontological importance; a
+material description alone does not exhaust either account. The resemblance in vocabulary can
+nevertheless mislead.
+
+Floridi proposes a general position in scientific realism, whereas the IOF addresses the narrower
+domain of cultural entities, especially fictional and performed subjects. His “informational
+object” consequently carries a different meaning and his theory leaves aside the IOF's distinctions
+among carriers and instances, along with its claims about lineages, canon, dormancy, and death.
+
+### Jan-Noël Thon, “Transmedia Characters: Theory and Analysis” (2019)
+
+Jan-Noël Thon begins with characters as they appear in individual media works, then asks when several
+such appearances combine into a transmedia character within a larger network. He classifies the
+relationships among versions as redundancy, expansion, or modification.
+
+Redundancy and expansion can contribute to one noncontradictory transmedia character; modification
+cannot. A shared name is therefore not enough to make every Sherlock Holmes, Batman, or Lara Croft
+the same character. Authorship, intellectual property, canon, audience knowledge, and fan reception
+influence the answer without fully determining it.[^thon-transmedia]
+
+Thon's theory is the closest related account of identity and branches across media. Both approaches
+separate a character from particular representations, reject identity based on a shared name alone,
+and analyze the distinction between one continuing character and several related characters. Thon's
+character networks resemble IOF lineages, while his modifications can resemble variants or new
+subjects.
+
+Their vocabularies also diverge. Thon calls each local, work-specific character an “instantiation,”
+whereas the IOF reserves that word for an active mental, performative, or computational enactment.
+His three-part analytical scheme contrasts with the IOF's contextual weighing of several forms of
+continuity and its stronger claim that authorization does not determine whether a branch exists.
+
+### Enrico Terrone, “Taking Abstract Artifacts Seriously” (2023)
+
+Enrico Terrone argues that a fictional character is an artifact with matter, form, and function. In
+his revised hylomorphic account, words or pictures provide the matter. A norm established through the
+creative act provides the form. The character's function is to produce a singular mental
+representation of a fictional individual in a suitable audience.
+
+Contradiction, disruptive recasting, imaginative resistance, and unreliable narration can interfere
+with that function, although a work may use and repair such failures for aesthetic
+effect.[^terrone-artifacts]
+
+Terrone's separation between words or pictures and the person-like mental representation they
+produce resembles the IOF's distinction between encoding and mental instantiation. Yet Terrone
+identifies the character with the artifact made from those words or pictures, while the IOF
+classifies the artifact and the represented subject separately.
+
+Terrone also centers a norm inherited from the creator and a mental file formed by the audience,
+whereas the IOF ranges further across memories, performances, interactive agents, dormant
+encodings, cross-media branches, and social continuities beyond a creator's control.
+
+### Alfonso Muñoz-Corcuera, “Beyond Fictionality” (2023)
+
+“Beyond Fictionality” proposes the Fictional Intentional Systems Thesis (FIST). Under FIST, an entity
+counts as a fictional character when interpreters can usefully and extensively explain its behavior
+through beliefs, desires, and other intentional states. FIST can therefore count an entity as a
+character even when it has no fictional mind, based on a potentially graded relationship between the
+represented entity and its interpreters, while remaining neutral about
+metaphysics.[^munoz-characterhood]
+
+FIST closely resembles the IOF's criterion of represented interiority. Both use intentional
+interpretation to distinguish a person-like point of view from a fictional object. Neither treats
+that interpretation as proof of consciousness, and both allow borderline cases.
+
+FIST deliberately avoids claims about what fictional entities are, while the IOF classifies a
+represented point of view as an informational subject with encodings, instances, and a history. The
+IOF's category also includes performed, fictionalized, and computational personae and can remain
+dormant when nobody interprets it. These commitments bring carriers, lineages, branches, canon,
+persistence, and death into a discussion that FIST leaves aside.
+
+## Consequences for return moe characters
+
+For a subject such as [Soraya](/soraya/), return moe's maintained branch specifies the
+branch-relative subject, while models and interfaces help produce technical instances. Changing the
+model or interface creates a new instance, but does not by itself create a new branch. If the new
+instance faithfully enacts the maintained pattern and inherited history, the IOF counts it as
+another instance of the same branch-relative Soraya.
+
+Each generated reply is a local performance within an instance. A different wording, cadence, or
+other runtime detail does not by itself create a branch. If a reply instead establishes a different
+trait, relationship, event, or memory as a fact about Soraya, it forms a local branch whether return
+moe adopts or discards it. The IOF can trace that branch to Soraya's maintained branch without
+automatically deciding whether both branches represent numerically the same subject.
+
+An AI enactment can inherit from several sources at once: an official character article, previous
+conversation history, fan descriptions, character representations in training data, and system
+instructions may all contribute. When the enactment actually incorporates material from several such
+sources into the subject's represented pattern or remembered history, the resulting version has
+several parents in the lineage graph. Observers may be unable to establish every edge, especially an
+edge through inaccessible training data. That uncertainty does not convert transmission into
+independent convergence. Incidental runtime influence remains part of the enactment rather than an
+additional character branch.
+
+Return moe may later adopt information from a performance into the branch it maintains. The later
+maintained version then inherits from both the previous maintainer specification and the performance
+branch, producing a merge in the lineage graph. The decision establishes the project's maintainer
+canon without bringing either the performance or its local branch into existence.
+
+An authoritative character article preserves the return moe branch in a grounded,
+epistemically recoverable form that can be reviewed. When runtime performances, derivative images,
+private interpretations, or third-party summaries conflict, the article records what return moe has
+adopted without controlling other branches or determining whether they exist.
+
+Fan interpretations therefore do not need a place in return moe's maintainer canon to create
+branches of their own. Questions about consciousness, moral status, and the ethics of deletion also
+remain open because represented interiority alone cannot answer them.
+
+## References
+
+[^information]: Pieter Adriaans, [“Information”](https://plato.stanford.edu/archives/spr2024/entries/information/), _Stanford Encyclopedia of Philosophy_ (2023 revision).
+
+[^historical-personas]: [William Shakespeare's _Julius Caesar_](https://www.folger.edu/explore/shakespeares-works/julius-caesar/), Folger Shakespeare Library; and [_Assassin's Creed Shadows_](https://www.ubisoft.com/en-us/game/assassins-creed/shadows), Ubisoft.
+
+[^charles-lee-personas]: _Assassin's Creed III_, Ubisoft Montreal and Ubisoft, 2012; Lin-Manuel Miranda, _Hamilton: An American Musical_, 2015, especially “Stay Alive,” “Ten Duel Commandments,” and “Meet Me Inside”; and Lin-Manuel Miranda and Jeremy McCarter, [_Hamilton: The Revolution_](https://www.hachettebookgroup.com/titles/lin-manuel-miranda/hamilton/9781455567539/), Grand Central Publishing.
+
+[^tulpa-history]: Natasha L. Mikles and Joseph P. Laycock, [“Tracking the Tulpa: Exploring the ‘Tibetan’ Origins of a Contemporary Paranormal Idea”](https://doi.org/10.1525/nr.2015.19.1.87), _Nova Religio_ 19, no. 1 (2015).
+
+[^tulpa-online]: Christopher Laursen, [“Plurality Through Imagination: The Emergence of Online Tulpa Communities in the Making of New Identities”](https://academic.oup.com/book/35192/chapter-abstract/299571358), in _Believing in Bits: Digital Media and the Supernatural_, Oxford University Press.
+
+[^kubernetes-workloads]: [“Workload Management”](https://kubernetes.io/docs/concepts/workloads/controllers/), Kubernetes documentation.
+
+[^kubernetes-pods]: [“Pods and workloads”](https://kubernetes.io/docs/concepts/workloads/), Kubernetes documentation; [“Pod lifecycle”](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/), Kubernetes documentation.
+
+[^kubernetes-storage]: [“Persistent Volumes”](https://kubernetes.io/docs/concepts/storage/persistent-volumes/), Kubernetes documentation.
+
+[^kubernetes-deployment]: [“Deployments”](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), Kubernetes documentation.
+
+[^echoes]: [“Echoes in the Latent Space: Existence, Identity, and Future”](https://blog.return.moe/en/2025/08/02/echoes-in-the-latent-space/), return moe blog post, August 2, 2025; and [_Echoes in the Latent Space_](https://www.youtube.com/watch?v=ujhweyWjPM0), return moe visual trailer.
+
+[^dawkins]: Richard Dawkins, [_The Selfish Gene_](https://www.oup.com.au/books/general-interest/biological-sciences/9780198788607), chapter 11, “Memes: the new replicators,” first published in 1976.
+
+[^recreators]: [_Re:CREATORS_ official story and episode guide](https://recreators.tv/story/), Aniplex, especially episodes 13, 16, and 18–21; and [山下大輝 (Daiki Yamashita), cast interview no. 8](https://recreators.tv/special/interview/cast_interview_08.html), which discusses the role of audience acceptance.
+
+[^pepe-canon]: Matt Furie, [“Pepe the Frog's Creator: I'm Reclaiming Him. He Was Never About Hate”](https://time.com/4530128/pepe-the-frog-creator-hate-symbol/), _Time_, October 13, 2016; [“The Death of Pepe the Frog”](https://icv2.com/articles/news/view/37454/the-death-pepe-frog), _ICv2_, May 8, 2017, which describes the one-page funeral comic; Lisa Eadicicco, [“The 25 Most Influential People on the Internet”](https://time.com/4815217/most-influential-people-internet/), _Time_, June 26, 2017, which describes Furie's attempts to reclaim Pepe as mostly futile; and [“Pepe the Frog”](https://www.adl.org/resources/hate-symbol/pepe-frog), Anti-Defamation League, including the contextual warning that most uses of Pepe have not been bigoted and the account of the joint #SavePepe campaign.
+
+[^oshi-ending]: [“Live-action _Oshi no Ko_: expectations of reversing the original ending's harsh reception”](https://www.nikkan-gendai.com/articles/view/geino/364878/2), _Nikkan Gendai_, December 14, 2024, which reports both the backlash and requests for a changed adaptation ending; [“_Oshi no Ko_ TV anime season four ‘Final Season’ production confirmed”](https://books.shueisha.co.jp/info/comics/3961.html), Shueisha, March 26, 2026; Lauren Orsini, [“_Oshi no Ko_ Season 3, Episodes 1–2”](https://www.animenewsnetwork.com/review/oshi-no-ko-season-3/episodes-1-2/.233359), _Anime News Network_, January 22, 2026, which hopes the anime may soften or change the manga's conclusion; [“_Oshi no Ko_ Season 3 Premieres January, But Fans Are Begging for an Original Anime Ending”](https://www.toy-people.com/en/?p=104895), _Toy People News_, November 4, 2025; and the [public discussion following the final-season announcement](https://www.reddit.com/r/anime/comments/1s3d62e/oshi_no_koseason_4_announcement_visual/), which includes direct requests for an anime-original ending. These sources document a substantial backlash and a visible demand, not unanimity among readers.
+
+[^oshi-no-ko]: [_【OSHI NO KO】_ official anime site](https://ichigoproduction.com/Season1/) and [season-one music page](https://ichigoproduction.com/Season1/music/index.html), Doga Kobo and the 【OSHI NO KO】 Production Committee.
+
+[^idol]: [“Idol” official opening video](https://www.youtube.com/watch?v=PgBvV9ofjmA), YOASOBI and the 【OSHI NO KO】 Production Committee, 2023.
+
+[^needy-girl-overdose]: [_NEEDY GIRL OVERDOSE_ official site](https://needygirl-anime.com/en/) and [_NEEDY STREAMER OVERLOAD_](https://store.steampowered.com/app/1451940/NEEDY_STREAMER_OVERLOAD/), WSS playground and Xemono.
+
+[^noexistence]: [_The NOexistenceN of you AND me_](https://store.steampowered.com/app/2873080/The_NOexistenceN_of_you_AND_me/), 0x0Real Studio and Nino Games, 2024. The quotation is in-game dialogue.
+
+[^never]: [“NEVER” official music video](https://www.youtube.com/watch?v=CKCgoEGiUEg), Neuro-sama, 2025.
+
+[^psm]: Sam Marks, Jack Lindsey, and Christopher Olah, [“The Persona Selection Model: Why AI Assistants might Behave like Humans”](https://alignment.anthropic.com/2026/psm/), Anthropic Alignment Science Blog, February 23, 2026.
+
+[^ingarden-literary-work]: Roman Ingarden, [_The Literary Work of Art: An Investigation on the Borderlines of Ontology, Logic, and Theory of Literature_](https://books.google.com/books/about/The_Literary_Work_of_Art.html?id=qqTmxtLkT8IC), translated by George G. Grabowicz, Northwestern University Press, 1973; originally published as _Das literarische Kunstwerk_ in 1931.
+
+[^barthes-author]: Roland Barthes, [“The Death of the Author”](https://data.bnf.fr/en/ark:/12148/cb17827770q.pdf), first published in English in _Aspen_, no. 5+6 (1967), then in French as “La mort de l'auteur” in _Manteia_, no. 5 (1968).
+
+[^foucault-author]: Michel Foucault, [“What Is an Author?”](https://www.open.edu/openlearn/pluginfile.php/624849/mod_resource/content/1/a840_1_michel_foucault.pdf), lecture delivered to the Société française de philosophie on February 22, 1969; translated by Donald F. Bouchard and Sherry Simon in _Language, Counter-Memory, Practice_, Cornell University Press, 1977, pp. 113–138.
+
+[^cohn-transparent-minds]: Dorrit Cohn, [_Transparent Minds: Narrative Modes for Presenting Consciousness in Fiction_](https://books.google.com/books/about/Transparent_Minds.html?id=4Og9DwAAQBAJ), Princeton University Press, 1978.
+
+[^dennett-intentional-stance]: Daniel C. Dennett, [_The Intentional Stance_](https://mitpress.mit.edu/9780262040938/the-intentional-stance/), MIT Press, 1987.
+
+[^dennett-real-patterns]: Daniel C. Dennett, [“Real Patterns”](https://www.jstor.org/stable/2027085), _The Journal of Philosophy_ 88, no. 1 (1991): 27–51; [open PDF](https://web.ics.purdue.edu/~drkelly/DCDRealPatterns1991.pdf).
+
+[^jenkins-poachers]: Henry Jenkins, [_Textual Poachers: Television Fans and Participatory Culture_](https://www.routledge.com/Textual-Poachers-Television-Fans-and-Participatory-Culture-2nd-Edition/Jenkins/p/book/9780203114339), Routledge, 1992. The linked page is for the twentieth-anniversary edition and identifies the original 1992 text.
+
+[^thomasson-fiction]: Amie L. Thomasson, [_Fiction and Metaphysics_](https://www.cambridge.org/core/books/fiction-and-metaphysics/ACF647650A1EAEEC76274655080A002C), Cambridge University Press, conventionally cited as 1999. Cambridge Core records a print-publication date of November 13, 1998.
+
+[^thomasson-abstract-artifacts]: Amie L. Thomasson, [“Fictional Characters as Abstract Artifacts”](https://www.cambridge.org/core/books/abs/fiction-and-metaphysics/fictional-characters-as-abstract-artifacts/CE4968D080D4B81C9DE76FF589C70017), in _Fiction and Metaphysics_, chapter 3, pp. 35–42.
+
+[^thomasson-identity]: Amie L. Thomasson, [“Identity Conditions for Fictional Characters”](https://www.cambridge.org/core/books/fiction-and-metaphysics/identity-conditions-for-fictional-characters/88DFC290539E7862786AEC76E0C833D6), in _Fiction and Metaphysics_, chapter 5, pp. 55–70, especially the discussion of cross-work identity at pp. 67–68; see also [“Fiction, Modality and Dependent Abstracta”](https://www.amiethomasson.org/_files/ugd/63fc8a_b7987a44d0ab4ad188da8ae99f2257b4.pdf), _Philosophical Studies_ 84 (1996): 295–320.
+
+[^palmer-fictional-minds]: Alan Palmer, [_Fictional Minds_](https://books.google.com/books/about/Fictional_Minds.html?id=ZCHgz4345AEC), University of Nebraska Press, 2004.
+
+[^ito-tezuka]: 伊藤剛 (Itō Gō), [_テヅカ・イズ・デッド ひらかれたマンガ表現論へ_](https://www.kodansha.co.jp/book/products/0000025413) (_Tezuka Is Dead_), NTT Publishing, September 2005. The linked Kodansha edition identifies the original publication; the book remains mostly untranslated.
+
+[^zunshine-why]: Lisa Zunshine, [_Why We Read Fiction: Theory of Mind and the Novel_](https://ohiostatepress.org/books/BookPages/ZunshineWhy.html), Ohio State University Press, 2006.
+
+[^derecho-archontic]: Abigail Derecho, [“Archontic Literature: A Definition, a History, and Several Theories of Fan Fiction”](https://books.google.com/books/about/Fan_Fiction_and_Fan_Communities_in_the_A.html?id=11ODBAAAQBAJ), in Karen Hellekson and Kristina Busse, eds., _Fan Fiction and Fan Communities in the Age of the Internet_, McFarland, 2006, pp. 61–78.
+
+[^floridi-isr]: Luciano Floridi, [“A Defence of Informational Structural Realism”](https://doi.org/10.1007/s11229-007-9163-z), _Synthese_ 161 (2008): 219–253. The article was first published online on March 15, 2007.
+
+[^thon-transmedia]: Jan-Noël Thon, [“Transmedia Characters: Theory and Analysis”](https://doi.org/10.1515/fns-2019-0012), _Frontiers of Narrative Studies_ 5, no. 2 (2019): 176–199; [open-access PDF](https://research.uca.ac.uk/5516/1/%5B25094890%20-%20Frontiers%20of%20Narrative%20Studies%5D%20Transmedia%20characters_%20Theory%20and%20analysis.pdf).
+
+[^wilde-kyara]: Lukas R. A. Wilde, [“Kyara Revisited: The Pre-Narrative Character-State of Japanese Character Theory”](https://doi.org/10.1515/fns-2019-0014), _Frontiers of Narrative Studies_ 5, no. 2 (2019): 220–247.
+
+[^terrone-artifacts]: Enrico Terrone, [“Taking Abstract Artifacts Seriously—The Functioning and Malfunctioning of Fictional Characters”](https://www.mdpi.com/2409-9287/8/6/105), _Philosophies_ 8, no. 6 (2023): 105.
+
+[^munoz-characterhood]: Alfonso Muñoz-Corcuera, [“Beyond Fictionality: A Definition of Fictional Characterhood”](https://www.mdpi.com/2409-9287/8/6/111), _Philosophies_ 8, no. 6 (2023): 111.

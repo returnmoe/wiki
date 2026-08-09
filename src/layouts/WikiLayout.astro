@@ -1,0 +1,27 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Navigation from '../components/Navigation.astro';
+import SearchDialog from '../components/SearchDialog.astro';
+import type { SeoDescriptor } from '../lib/seo-manifest';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  seo: SeoDescriptor;
+  articleId?: string;
+}
+
+const { seo, articleId } = Astro.props;
+const locale = seo.locale;
+const alternateUrl = seo.indexability === 'error' ? undefined : seo.localizedCounterpartPath;
+---
+
+<BaseLayout seo={seo}>
+  <Header locale={locale} alternateUrl={alternateUrl} articleId={articleId} />
+  <div class="wiki-frame">
+    <aside class="global-sidebar"><Navigation locale={locale} /></aside>
+    <main id="main-content" class="wiki-main"><slot /></main>
+  </div>
+  <Footer locale={locale} />
+  <SearchDialog locale={locale} />
+</BaseLayout>

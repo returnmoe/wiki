@@ -1,0 +1,30 @@
+name: Production SEO monitor
+
+on:
+  schedule:
+    - cron: '17 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  crawl-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v6
+      - name: Use the project Node version
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install exact dependencies
+        run: npm ci
+      - name: Check production crawl behavior
+        run: npm run smoke:production
+        env:
+          SEO_SMOKE_BASE_URL: https://wiki.return.moe
+          SEO_SMOKE_PAGES_URLS: ${{ vars.SEO_SMOKE_PAGES_URLS }}
+          SEO_SMOKE_REQUIRE_PREVIEW: ${{ vars.SEO_SMOKE_REQUIRE_PREVIEW }}

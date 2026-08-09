@@ -1,0 +1,113 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { homeConfiguration } from '../data/home';
+import { articleUrl, categoryUrl, pageUrl, type WikiLocale } from '../lib/config';
+import { kindLabels, t } from '../lib/i18n';
+import { getSeoDescriptor } from '../lib/seo-manifest-astro';
+import WikiLayout from '../layouts/WikiLayout.astro';
+
+interface Props {
+  locale: WikiLocale;
+  articles: CollectionEntry<'articles'>[];
+  categories: CollectionEntry<'categories'>[];
+}
+
+const { locale, articles, categories } = Astro.props;
+const strings = t(locale);
+const seo = await getSeoDescriptor(locale === 'pt-BR' ? '/pt/' : '/');
+const featured = articles.find((article) => article.data.id === homeConfiguration.featuredArticle);
+const portals = homeConfiguration.categoryPortals
+  .map((id) => categories.find((category) => category.data.id === id))
+  .filter((category): category is CollectionEntry<'categories'> => Boolean(category));
+const projects = homeConfiguration.selectedProjects
+  .map((id) => articles.find((article) => article.data.id === id))
+  .filter((article): article is CollectionEntry<'articles'> => Boolean(article));
+---
+
+<WikiLayout seo={seo}>
+  <section class="wiki-home">
+    <header class="wiki-home-hero">
+      <h1>return moe wiki</h1>
+      <p>{strings.wikiLead}</p>
+      <a class="hero-search" href={pageUrl('search', locale)} data-open-search>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-4-4"></path>
+        </svg>
+        <span>{strings.searchPlaceholder}</span>
+        <kbd>⌘ K</kbd>
+      </a>
+      <p class="article-total">{strings.articleCount(articles.length)}</p>
+    </header>
+
+    <section class="home-section" aria-labelledby="category-portals-title">
+      <div class="home-section-heading">
+        <h2 id="category-portals-title">{strings.browseCategories}</h2>
+      </div>
+      <div class="category-grid">
+        {
+          portals.map((category) => {
+            const count = articles.filter((article) =>
+              article.data.categories.includes(category.data.id),
+            ).length;
+            return (
+              <a class="category-card" href={categoryUrl(category.data.id, locale)}>
+                <strong>{category.data.title}</strong>
+                <span>{category.data.summary}</span>
+                <small>{strings.articleCount(count)}</small>
+              </a>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    {
+      featured && (
+        <section class="home-section featured-section" aria-labelledby="featured-title">
+          <div class="home-section-heading">
+            <h2 id="featured-title">{strings.featuredArticle}</h2>
+          </div>
+          <article class="featured-article">
+            {featured.data.infobox?.image && (
+              <img src={featured.data.infobox.image.src} alt={featured.data.infobox.image.alt} />
+            )}
+            <div>
+              <p class="article-list-kind">{kindLabels[locale][featured.data.kind]}</p>
+              <h3>{featured.data.title}</h3>
+              <p>{featured.data.summary}</p>
+              <a href={articleUrl(featured.data.id, locale)}>{strings.readArticle} →</a>
+            </div>
+          </article>
+        </section>
+      )
+    }
+
+    {
+      projects.length > 0 && (
+        <section class="home-section" aria-labelledby="selected-projects-title">
+          <div class="home-section-heading">
+            <h2 id="selected-projects-title">{strings.selectedProjects}</h2>
+          </div>
+          <div class="project-grid">
+            {projects.map((project) => (
+              <a class="project-card" href={articleUrl(project.data.id, locale)}>
+                <small>{kindLabels[locale][project.data.kind]}</small>
+                <strong>{project.data.title}</strong>
+                <span>{project.data.summary}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="home-contribute">
+      <div>
+        <h2>{strings.contributeTitle}</h2>
+        <p>{strings.contributeText}</p>
+      </div>
+      <a class="button-link" href={pageUrl('contribute', locale)}>{strings.contribute}</a>
+    </section>
+  </section>
+</WikiLayout>

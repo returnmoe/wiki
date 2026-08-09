@@ -1,0 +1,36 @@
+---
+import type { WikiLocale } from '../lib/config';
+import { t } from '../lib/i18n';
+
+interface Props {
+  locale?: WikiLocale;
+  title?: string;
+  summary: string;
+}
+
+const { locale = 'en', title = t(locale).majorSpoilerWarning, summary } = Astro.props;
+---
+
+<details class="article-notice spoiler-notice">
+  <summary class="spoiler-notice-summary">
+    <span class="spoiler-notice-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 3 2.7 19.1a1.3 1.3 0 0 0 1.1 1.9h16.4a1.3 1.3 0 0 0 1.1-1.9L12 3Z"></path>
+        <path d="M12 9v5"></path>
+        <path d="M12 17.5h.01"></path>
+      </svg>
+    </span>
+    <span class="spoiler-notice-copy">
+      <strong>{title}</strong>
+      <span>{summary}</span>
+    </span>
+    <span class="spoiler-notice-chevron" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="m9 6 6 6-6 6"></path>
+      </svg>
+    </span>
+  </summary>
+  <div class="spoiler-notice-content">
+    <slot />
+  </div>
+</details>

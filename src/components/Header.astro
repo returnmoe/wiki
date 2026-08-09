@@ -1,0 +1,126 @@
+---
+import { homeUrl, pageUrl, repositoryTranslationUrl, type WikiLocale } from '../lib/config';
+import { languages, t } from '../lib/i18n';
+import Navigation from './Navigation.astro';
+
+interface Props {
+  locale: WikiLocale;
+  alternateUrl?: string;
+  articleId?: string;
+}
+
+const { locale, alternateUrl, articleId } = Astro.props;
+const strings = t(locale);
+const currentLanguage = languages[locale];
+const otherLanguage = languages[locale === 'en' ? 'pt-BR' : 'en'];
+const fallbackLanguageUrl = locale === 'en' ? '/pt/' : '/';
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <button
+      class="icon-button mobile-menu-button"
+      type="button"
+      data-open-navigation
+      aria-label={strings.menu}
+      aria-controls="mobile-navigation"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+    </button>
+    <a class="site-brand" href={homeUrl(locale)} aria-label={strings.siteName}>
+      <span class="brand-mark">
+        <img class="brand-logo brand-logo-dark" src="/assets/logo-dark.svg" alt="" />
+        <img class="brand-logo brand-logo-light" src="/assets/logo.svg" alt="" />
+      </span>
+      <span class="brand-name">Wiki</span>
+    </a>
+
+    <a class="header-search" href={pageUrl('search', locale)} data-open-search>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m20 20-4-4"></path>
+      </svg>
+      <span>{strings.searchPlaceholder}</span>
+      <kbd>⌘ K</kbd>
+    </a>
+
+    <nav class="header-links" aria-label="return moe">
+      <a href="https://return.moe/">{strings.mainSite}</a>
+      <a href="https://blog.return.moe/">{strings.blog}</a>
+    </nav>
+
+    <div class="header-controls">
+      <details class="language-menu">
+        <summary class="icon-button language-button" aria-label={strings.language}>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5h10M9 3v2M5 9c2 3 4.5 5 8 6M12 5c-1 5-4 8-8 10M14 20l4-10 4 10M16 16h4"
+            ></path>
+          </svg>
+          <span>{locale === 'en' ? 'EN' : 'PT'}</span>
+        </summary>
+        <div class="language-popover">
+          <strong>{strings.language}: {currentLanguage}</strong>
+          {
+            alternateUrl ? (
+              <a href={alternateUrl}>{otherLanguage}</a>
+            ) : locale === 'en' && articleId ? (
+              <>
+                <span class="unavailable-language">{strings.translationUnavailable}</span>
+                <a href={repositoryTranslationUrl(articleId)}>{strings.requestTranslation}</a>
+              </>
+            ) : (
+              <a href={fallbackLanguageUrl}>{otherLanguage}</a>
+            )
+          }
+        </div>
+      </details>
+      <button
+        class="icon-button theme-button"
+        type="button"
+        data-theme-toggle
+        aria-label={strings.switchTheme}
+      >
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.5"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+          ></path>
+        </svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.2 15.2A8.4 8.4 0 0 1 8.8 3.8a8.4 8.4 0 1 0 11.4 11.4Z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog id="mobile-navigation" class="mobile-navigation-dialog">
+  <div class="mobile-navigation-header">
+    <span>{strings.navigation}</span>
+    <button class="icon-button" type="button" data-close-navigation aria-label={strings.close}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+    </button>
+  </div>
+  <Navigation locale={locale} />
+</dialog>
+
+<script>
+  const themeButton = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  themeButton?.addEventListener('click', () => {
+    const current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+    window.returnMoeTheme?.set(current === 'dark' ? 'light' : 'dark');
+  });
+
+  const navigationDialog = document.querySelector<HTMLDialogElement>('#mobile-navigation');
+  document.querySelector('[data-open-navigation]')?.addEventListener('click', () => {
+    navigationDialog?.showModal();
+  });
+  document.querySelector('[data-close-navigation]')?.addEventListener('click', () => {
+    navigationDialog?.close();
+  });
+  navigationDialog?.addEventListener('click', (event) => {
+    if (event.target === navigationDialog) navigationDialog.close();
+  });
+</script>

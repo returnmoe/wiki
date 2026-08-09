@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import { homeUrl, pageUrl, type WikiLocale } from '../lib/config';
+import { t } from '../lib/i18n';
+
+interface Props {
+  locale: WikiLocale;
+  compact?: boolean;
+}
+
+const { locale, compact = false } = Astro.props;
+const strings = t(locale);
+const categories = (await getCollection('categories'))
+  .filter((category) => category.data.locale === locale)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<nav class:list={['wiki-navigation', { compact }]} aria-label={strings.navigation}>
+  <a href={homeUrl(locale)}>{strings.mainPage}</a>
+  <a href={pageUrl('all-pages', locale)}>{strings.allPages}</a>
+  <a href={pageUrl('contribute', locale)}>{strings.contribute}</a>
+  {
+    !compact && (
+      <>
+        <p class="navigation-heading">{strings.categories}</p>
+        {categories.map((category) => (
+          <a href={`${locale === 'pt-BR' ? '/pt' : ''}/category/${category.data.id}/`}>
+            {category.data.title}
+          </a>
+        ))}
+      </>
+    )
+  }
+</nav>

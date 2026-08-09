@@ -1,0 +1,102 @@
+---
+import { articleUrl, type ArticleKind, type WikiLocale } from '../lib/config';
+import { fieldLabel, fieldOrder } from '../lib/infobox';
+import { kindLabels, t } from '../lib/i18n';
+
+type LinkedValue = { text: string; article?: string; url?: string };
+type Value = string | string[] | LinkedValue | LinkedValue[];
+
+interface InfoboxData {
+  image?: {
+    src: string;
+    alt: string;
+    crop?: boolean;
+    surface?: 'light' | 'dark';
+    caption?: string;
+    credit?: string;
+    sourceUrl?: string;
+    license?: string;
+  };
+  fields: Array<{ key: string; label?: string; value: Value }>;
+}
+
+interface Props {
+  title: string;
+  kind: ArticleKind;
+  locale: WikiLocale;
+  infobox?: InfoboxData;
+}
+
+const { title, kind, locale, infobox } = Astro.props;
+const strings = t(locale);
+const fields = [...(infobox?.fields ?? [])].sort(
+  (a, b) => fieldOrder(kind, a.key) - fieldOrder(kind, b.key),
+);
+
+const normalizeValue = (value: Value): Array<string | LinkedValue> =>
+  Array.isArray(value) ? value : [value];
+---
+
+{
+  infobox && (
+    <aside class={`infobox infobox-${kind}`} aria-label={`${title} ${kindLabels[locale][kind]}`}>
+      <header class="infobox-header">
+        <strong>{title}</strong>
+        <span>{kindLabels[locale][kind]}</span>
+      </header>
+      {infobox.image && (
+        <figure
+          class={`infobox-image${infobox.image.crop === false ? ' infobox-image-uncropped' : ''}${
+            infobox.image.surface ? ` infobox-image-surface-${infobox.image.surface}` : ''
+          }`}
+        >
+          <img src={infobox.image.src} alt={infobox.image.alt} loading="eager" />
+          {(infobox.image.caption || infobox.image.credit || infobox.image.sourceUrl) && (
+            <figcaption>
+              {infobox.image.caption && (
+                <span class="infobox-image-caption">{infobox.image.caption}</span>
+              )}
+              {(infobox.image.credit || infobox.image.sourceUrl) && (
+                <span class="infobox-image-source">
+                  <span class="image-source-label">{strings.gallerySource}:</span>{' '}
+                  {infobox.image.sourceUrl ? (
+                    <a href={infobox.image.sourceUrl}>
+                      {infobox.image.credit || infobox.image.sourceUrl}
+                    </a>
+                  ) : (
+                    infobox.image.credit
+                  )}
+                </span>
+              )}
+            </figcaption>
+          )}
+        </figure>
+      )}
+      {fields.length > 0 && (
+        <dl class="infobox-facts">
+          {fields.map((field) => (
+            <div>
+              <dt>{fieldLabel(kind, field.key, locale, field.label)}</dt>
+              <dd>
+                {normalizeValue(field.value).map((value, index, values) => (
+                  <>
+                    {typeof value === 'string' ? (
+                      value
+                    ) : value.article ? (
+                      <a href={articleUrl(value.article, locale)}>{value.text}</a>
+                    ) : value.url ? (
+                      <a href={value.url}>{value.text}</a>
+                    ) : (
+                      value.text
+                    )}
+                    {index < values.length - 1 && <br />}
+                  </>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </aside>
+  )
+}

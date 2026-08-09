@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { articleUrl, type WikiLocale } from '../lib/config';
+import { t } from '../lib/i18n';
+
+interface Props {
+  articles: CollectionEntry<'articles'>[];
+  locale: WikiLocale;
+}
+
+const { articles, locale } = Astro.props;
+const strings = t(locale);
+const headingId =
+  locale === 'pt-BR' ? 'lista-de-artigos-autoritativos' : 'authoritative-article-list';
+---
+
+<section class="authoritative-article-list" aria-labelledby={headingId}>
+  <h2 id={headingId}>{strings.authoritativeArticleList}</h2>
+  <ul>
+    {
+      articles.map((article) => (
+        <li>
+          <a href={articleUrl(article.data.id, locale)}>{article.data.title}</a>
+          <span>{article.data.summary}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>

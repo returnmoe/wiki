@@ -1,0 +1,89 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { articleUrl, categoryUrl, homeUrl, type WikiLocale } from '../lib/config';
+import { kindLabels, t } from '../lib/i18n';
+import { getSeoDescriptor } from '../lib/seo-manifest-astro';
+import WikiLayout from '../layouts/WikiLayout.astro';
+
+interface Props {
+  entry: CollectionEntry<'categories'>;
+}
+
+const { entry } = Astro.props;
+const locale = entry.data.locale as WikiLocale;
+const strings = t(locale);
+const seo = await getSeoDescriptor(categoryUrl(entry.data.id, locale));
+const { Content } = await render(entry);
+const allArticles = await getCollection('articles');
+const allCategories = await getCollection('categories');
+const articles = allArticles
+  .filter(
+    (article) => article.data.locale === locale && article.data.categories.includes(entry.data.id),
+  )
+  .sort((a, b) =>
+    (a.data.sortKey ?? a.data.title).localeCompare(b.data.sortKey ?? b.data.title, locale),
+  );
+const children = allCategories
+  .filter((category) => category.data.locale === locale && category.data.parent === entry.data.id)
+  .sort((a, b) => a.data.order - b.data.order);
+const parent = entry.data.parent
+  ? allCategories.find(
+      (category) => category.data.locale === locale && category.data.id === entry.data.parent,
+    )
+  : undefined;
+---
+
+<WikiLayout seo={seo}>
+  <section class="special-page category-page">
+    <nav class="breadcrumbs" aria-label={strings.breadcrumb}>
+      <a href={homeUrl(locale)}>{strings.mainPage}</a><span aria-hidden="true">/</span>
+      <span>{strings.categories}</span>
+    </nav>
+    <header class="special-page-header">
+      <h1>{entry.data.title}</h1>
+      <p>{entry.data.summary}</p>
+      <span class="count-label">{strings.articleCount(articles.length)}</span>
+    </header>
+    <div class="category-description"><Content /></div>
+    {
+      parent && (
+        <p class="parent-category">
+          <span>{strings.categoryLabel}:</span>
+          <a href={categoryUrl(parent.data.id, locale)}>{parent.data.title}</a>
+        </p>
+      )
+    }
+    {
+      children.length > 0 && (
+        <section class="category-section">
+          <h2>{strings.subcategories}</h2>
+          <div class="category-grid compact-grid">
+            {children.map((category) => (
+              <a class="category-card" href={categoryUrl(category.data.id, locale)}>
+                <strong>{category.data.title}</strong>
+                <span>{category.data.summary}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+    <section class="category-section">
+      <h2>{strings.articlesInCategory}</h2>
+      {
+        articles.length ? (
+          <ul class="category-article-list">
+            {articles.map((article) => (
+              <li>
+                <a href={articleUrl(article.data.id, locale)}>{article.data.title}</a>
+                <span>{kindLabels[locale][article.data.kind]}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty-message">{strings.noArticles}</p>
+        )
+      }
+    </section>
+  </section>
+</WikiLayout>

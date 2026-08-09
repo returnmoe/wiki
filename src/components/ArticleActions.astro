@@ -1,0 +1,28 @@
+---
+import {
+  repositoryDiscussionUrl,
+  repositoryEditUrl,
+  repositoryHistoryUrl,
+  repositoryReportUrl,
+  type WikiLocale,
+} from '../lib/config';
+import { t } from '../lib/i18n';
+
+interface Props {
+  id: string;
+  title: string;
+  sourcePath: string;
+  locale: WikiLocale;
+}
+
+const { id, title, sourcePath, locale } = Astro.props;
+const strings = t(locale);
+---
+
+<nav class="article-actions" aria-label={strings.articleTools}>
+  <span class="article-action-current" aria-current="page">{strings.article}</span>
+  <a href={repositoryEditUrl(sourcePath)}>{strings.edit}</a>
+  <a href={repositoryDiscussionUrl()}>{strings.discuss}</a>
+  <a href={repositoryHistoryUrl(sourcePath)}>{strings.history}</a>
+</nav>
+<a class="report-link" href={repositoryReportUrl(id, title)}>{strings.report}</a>

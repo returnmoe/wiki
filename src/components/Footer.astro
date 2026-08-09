@@ -1,0 +1,25 @@
+---
+import { REPOSITORY_URL, type WikiLocale } from '../lib/config';
+import { t } from '../lib/i18n';
+
+interface Props {
+  locale: WikiLocale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+---
+
+<footer class="site-footer">
+  <span class="footer-mark" aria-hidden="true"></span>
+  <p>{strings.footerText}</p>
+  <nav aria-label={strings.socialLinks}>
+    <a href={REPOSITORY_URL}>GitHub</a>
+    <span aria-hidden="true">•</span>
+    <a href="https://www.youtube.com/@returnmoe">YouTube</a>
+    <span aria-hidden="true">•</span>
+    <a href="https://instagram.com/returnmoe">Instagram</a>
+    <span aria-hidden="true">•</span>
+    <a href="https://huggingface.co/returnmoe">Hugging Face</a>
+  </nav>
+</footer>

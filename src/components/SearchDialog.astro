@@ -1,0 +1,49 @@
+---
+import { pageUrl, type WikiLocale } from '../lib/config';
+import { t } from '../lib/i18n';
+
+interface Props {
+  locale: WikiLocale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+---
+
+<dialog id="wiki-search-dialog" class="search-dialog">
+  <div class="search-dialog-header">
+    <strong>{strings.search}</strong>
+    <button class="icon-button" type="button" data-close-search aria-label={strings.close}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+    </button>
+  </div>
+  <form
+    class="search-interface search-interface-dialog"
+    action={pageUrl('search', locale)}
+    method="get"
+    data-search-root
+    data-empty-message={strings.noResults}
+    data-unavailable-message={strings.searchUnavailable}
+    data-result-singular={strings.resultSingular}
+    data-result-plural={strings.resultPlural}
+  >
+    <label class="search-input-wrap">
+      <span class="sr-only">{strings.search}</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m20 20-4-4"></path>
+      </svg>
+      <input
+        type="search"
+        name="q"
+        autocomplete="off"
+        placeholder={strings.searchPlaceholder}
+        data-search-input
+      />
+    </label>
+    <div class="search-status" data-search-status aria-live="polite"></div>
+    <div class="search-results search-results-dialog" data-search-results></div>
+  </form>
+</dialog>
+
+<script is:inline src="/scripts/search.js" defer></script>

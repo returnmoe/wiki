@@ -1,0 +1,194 @@
+---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/400-italic.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/manrope/500.css';
+import '@fontsource/manrope/600.css';
+import '@fontsource/manrope/700.css';
+import '@fontsource/manrope/800.css';
+import '@fontsource/source-serif-4/400.css';
+import '../styles/global.css';
+import type { WikiLocale } from '../lib/config';
+import { t } from '../lib/i18n';
+import { buildStructuredData, type SeoDescriptor } from '../lib/seo-manifest';
+
+interface Props {
+  seo: SeoDescriptor;
+}
+
+const { seo } = Astro.props;
+const locale = seo.locale as WikiLocale;
+const strings = t(locale);
+const structuredData = buildStructuredData(seo);
+const serializedStructuredData = structuredData
+  ? JSON.stringify(structuredData).replaceAll('<', '\\u003c')
+  : undefined;
+const ogLocale = locale === 'pt-BR' ? 'pt_BR' : 'en_US';
+const articleTags = [seo.kindTag, ...seo.categoryTags].filter((tag): tag is string => Boolean(tag));
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={seo.description} />
+    <meta name="robots" content={seo.robots} />
+    <meta name="theme-color" content="#070811" id="theme-color" />
+    {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
+    {
+      seo.alternates.map((alternate) => (
+        <link rel="alternate" hreflang={alternate.locale} href={alternate.url} />
+      ))
+    }
+    {seo.xDefaultUrl && <link rel="alternate" hreflang="x-default" href={seo.xDefaultUrl} />}
+    {
+      seo.indexability !== 'error' && (
+        <>
+          <meta property="og:type" content={seo.ogType} />
+          <meta property="og:site_name" content="return moe wiki" />
+          <meta property="og:locale" content={ogLocale} />
+          {seo.alternates
+            .filter((alternate) => alternate.locale !== locale)
+            .map((alternate) => (
+              <meta
+                property="og:locale:alternate"
+                content={alternate.locale === 'pt-BR' ? 'pt_BR' : 'en_US'}
+              />
+            ))}
+          <meta property="og:title" content={seo.documentTitle} />
+          <meta property="og:description" content={seo.description} />
+          <meta property="og:url" content={seo.canonicalUrl} />
+          <meta property="og:image" content={seo.image.url} />
+          <meta property="og:image:secure_url" content={seo.image.url} />
+          <meta property="og:image:type" content={seo.image.mimeType} />
+          <meta property="og:image:width" content={String(seo.image.width)} />
+          <meta property="og:image:height" content={String(seo.image.height)} />
+          <meta property="og:image:alt" content={seo.image.alt} />
+          {seo.pageKind === 'article' && seo.categoryTags[0] && (
+            <meta property="article:section" content={seo.categoryTags[0]} />
+          )}
+          {seo.pageKind === 'article' &&
+            articleTags.map((tag) => <meta property="article:tag" content={tag} />)}
+          {seo.publishedAt && <meta property="article:published_time" content={seo.publishedAt} />}
+          {seo.modifiedAt && <meta property="article:modified_time" content={seo.modifiedAt} />}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={seo.documentTitle} />
+          <meta name="twitter:description" content={seo.description} />
+          <meta name="twitter:image" content={seo.image.url} />
+          <meta name="twitter:image:alt" content={seo.image.alt} />
+        </>
+      )
+    }
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>{seo.documentTitle}</title>
+    {
+      serializedStructuredData && (
+        <script is:inline type="application/ld+json" set:html={serializedStructuredData} />
+      )
+    }
+    <script is:inline>
+      (() => {
+        const cookieName = 'returnmoe_theme';
+        const colors = { dark: '#070811', light: '#f6f7fb' };
+        const readThemeCookie = () => {
+          const cookie = document.cookie
+            .split('; ')
+            .find((entry) => entry.startsWith(`${cookieName}=`));
+          if (!cookie) return null;
+          const value = decodeURIComponent(cookie.slice(cookie.indexOf('=') + 1));
+          return value === 'light' || value === 'dark' ? value : null;
+        };
+        const applyTheme = (theme) => {
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+          const meta = document.getElementById('theme-color');
+          if (meta) meta.setAttribute('content', colors[theme]);
+          document.dispatchEvent(new CustomEvent('returnmoe:themechange', { detail: { theme } }));
+        };
+        const saveTheme = (theme) => {
+          const host = window.location.hostname;
+          const production = host === 'return.moe' || host.endsWith('.return.moe');
+          let cookie = `${cookieName}=${encodeURIComponent(theme)}; Max-Age=31536000; Path=/; SameSite=Lax`;
+          if (production) cookie += '; Domain=.return.moe; Secure';
+          document.cookie = cookie;
+        };
+        const media = window.matchMedia('(prefers-color-scheme: dark)');
+        applyTheme(readThemeCookie() || (media.matches ? 'dark' : 'light'));
+        const followSystem = (event) => {
+          if (!readThemeCookie()) applyTheme(event.matches ? 'dark' : 'light');
+        };
+        media.addEventListener('change', followSystem);
+        window.returnMoeTheme = {
+          set(theme) {
+            if (theme !== 'light' && theme !== 'dark') return;
+            saveTheme(theme);
+            applyTheme(theme);
+          },
+        };
+      })();
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{strings.skipContent}</a>
+    <slot />
+    <script>
+      const currentOrigin = window.location.origin;
+      const canonicalOrigin = 'https://wiki.return.moe';
+
+      const isExternalHttpLink = (href: string): boolean => {
+        try {
+          const url = new URL(href, currentOrigin);
+          return (
+            (url.protocol === 'http:' || url.protocol === 'https:') &&
+            url.origin !== currentOrigin &&
+            url.origin !== canonicalOrigin
+          );
+        } catch {
+          return false;
+        }
+      };
+
+      const applyExternalLinkPolicy = (link: HTMLAnchorElement): void => {
+        const href = link.getAttribute('href');
+        if (!href || !isExternalHttpLink(href)) return;
+
+        const rel = new Set((link.getAttribute('rel') ?? '').split(/\s+/).filter(Boolean));
+        rel.add('noopener');
+        rel.add('noreferrer');
+        link.target = '_blank';
+        link.rel = [...rel].join(' ');
+      };
+
+      const applyBelow = (element: Element): void => {
+        if (element instanceof HTMLAnchorElement) applyExternalLinkPolicy(element);
+        element.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(applyExternalLinkPolicy);
+      };
+
+      document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(applyExternalLinkPolicy);
+
+      new MutationObserver((records) => {
+        for (const record of records) {
+          if (record.type === 'attributes' && record.target instanceof HTMLAnchorElement) {
+            applyExternalLinkPolicy(record.target);
+          }
+          record.addedNodes.forEach((node) => {
+            if (node instanceof Element) applyBelow(node);
+          });
+        }
+      }).observe(document.body, {
+        attributeFilter: ['href'],
+        attributes: true,
+        childList: true,
+        subtree: true,
+      });
+    </script>
+  </body>
+</html>

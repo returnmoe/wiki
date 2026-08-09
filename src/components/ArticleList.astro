@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { articleUrl, type WikiLocale } from '../lib/config';
+import { kindLabels } from '../lib/i18n';
+
+interface Props {
+  articles: CollectionEntry<'articles'>[];
+  locale: WikiLocale;
+  compact?: boolean;
+}
+
+const { articles, locale, compact = false } = Astro.props;
+---
+
+<div class:list={['article-list', { compact }]}>
+  {
+    articles.map((article) => (
+      <article class="article-list-item">
+        <p class="article-list-kind">{kindLabels[locale][article.data.kind]}</p>
+        <h2>
+          <a href={articleUrl(article.data.id, locale)}>{article.data.title}</a>
+        </h2>
+        <p>{article.data.summary}</p>
+      </article>
+    ))
+  }
+</div>

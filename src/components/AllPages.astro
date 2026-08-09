@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { articleUrl, pageUrl, type WikiLocale } from '../lib/config';
+import { kindLabels, t } from '../lib/i18n';
+import { getSeoDescriptor } from '../lib/seo-manifest-astro';
+import WikiLayout from '../layouts/WikiLayout.astro';
+
+interface Props {
+  locale: WikiLocale;
+  articles: CollectionEntry<'articles'>[];
+}
+
+const { locale, articles } = Astro.props;
+const strings = t(locale);
+const seo = await getSeoDescriptor(pageUrl('all-pages', locale));
+const sorted = [...articles].sort((a, b) =>
+  (a.data.sortKey ?? a.data.title).localeCompare(b.data.sortKey ?? b.data.title, locale),
+);
+const groups = new Map<string, CollectionEntry<'articles'>[]>();
+for (const article of sorted) {
+  const letter = (article.data.sortKey ?? article.data.title).charAt(0).toLocaleUpperCase(locale);
+  groups.set(letter, [...(groups.get(letter) ?? []), article]);
+}
+---
+
+<WikiLayout seo={seo}>
+  <section class="special-page all-pages-page">
+    <header class="special-page-header">
+      <h1>{strings.allPages}</h1>
+      <p>{strings.alphabeticalIndex}</p>
+      <span class="count-label">{strings.articleCount(articles.length)}</span>
+    </header>
+    {
+      articles.length ? (
+        <>
+          <nav class="alphabet-navigation" aria-label={strings.alphabeticalIndex}>
+            {[...groups.keys()].map((letter) => (
+              <a href={`#letter-${letter}`}>{letter}</a>
+            ))}
+          </nav>
+          <div class="alphabetical-list">
+            {[...groups.entries()].map(([letter, entries]) => (
+              <section aria-labelledby={`letter-${letter}`}>
+                <h2 id={`letter-${letter}`}>{letter}</h2>
+                <ul>
+                  {entries.map((article) => (
+                    <li>
+                      <a href={articleUrl(article.data.id, locale)}>{article.data.title}</a>
+                      <span>{kindLabels[locale][article.data.kind]}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p class="empty-message">{strings.noArticles}</p>
+      )
+    }
+  </section>
+</WikiLayout>

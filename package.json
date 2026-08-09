@@ -1,0 +1,58 @@
+{
+  "name": "returnmoe-wiki",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "check:astro": "astro check",
+    "validate:content": "node --import tsx scripts/validate-content.ts",
+    "check": "npm run check:astro && npm run validate:content",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "generate:deployment": "node --import tsx scripts/generate-deployment.ts",
+    "validate:deployment": "node --import tsx scripts/validate-deployment.ts",
+    "validate:links": "node --import tsx scripts/validate-built-links.ts",
+    "validate:seo": "node --import tsx scripts/validate-seo.ts",
+    "smoke:production": "node --import tsx scripts/smoke-seo.ts",
+    "build": "npm run check && astro build && npm run generate:deployment && npm run validate:seo && npm run validate:links && pagefind --site dist && npm run validate:deployment",
+    "preview": "astro preview",
+    "preview:cloudflare": "npm run build && wrangler pages dev",
+    "deploy:cloudflare": "npm run build && wrangler pages deploy",
+    "test:e2e": "npm run build && playwright test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:markdown": "markdownlint-cli2",
+    "verify": "npm run format:check && npm run lint:markdown && npm test && npm run build"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "workerd@1.20260801.1": true
+  },
+  "dependencies": {
+    "@astrojs/mdx": "7.0.5",
+    "@fontsource/inter": "5.2.8",
+    "@fontsource/manrope": "5.2.8",
+    "@fontsource/source-serif-4": "5.2.8",
+    "astro": "7.2.0",
+    "pagefind": "1.5.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "@axe-core/playwright": "4.12.1",
+    "@playwright/test": "1.61.1",
+    "@types/node": "^24.10.1",
+    "gray-matter": "4.0.3",
+    "markdownlint-cli2": "0.23.2",
+    "prettier": "3.9.5",
+    "prettier-plugin-astro": "0.14.1",
+    "tsx": "4.23.0",
+    "typescript": "5.9.3",
+    "vitest": "4.1.10",
+    "wrangler": "4.120.0"
+  }
+}

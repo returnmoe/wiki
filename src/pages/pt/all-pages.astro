@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import AllPages from '../../components/AllPages.astro';
+
+const articles = (await getCollection('articles')).filter(
+  (article) => article.data.locale === 'pt-BR',
+);
+---
+
+<AllPages locale="pt-BR" articles={articles} />

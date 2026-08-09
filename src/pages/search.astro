@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import SearchPage from '../components/SearchPage.astro';
+
+const categories = (await getCollection('categories'))
+  .filter((category) => category.data.locale === 'en')
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<SearchPage locale="en" categories={categories} />

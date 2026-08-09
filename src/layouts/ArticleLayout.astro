@@ -1,0 +1,190 @@
+---
+import type { MarkdownHeading } from 'astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ArticleActions from '../components/ArticleActions.astro';
+import ArticleGallery from '../components/ArticleGallery.astro';
+import AuthoritativeArticleList from '../components/AuthoritativeArticleList.astro';
+import AuthorityNotice from '../components/AuthorityNotice.astro';
+import Infobox from '../components/Infobox.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { articleSourcePath, articleUrl, categoryUrl, type WikiLocale } from '../lib/config';
+import { kindLabels, t } from '../lib/i18n';
+import { getSeoDescriptor } from '../lib/seo-manifest-astro';
+import WikiLayout from './WikiLayout.astro';
+
+interface Props {
+  entry: CollectionEntry<'articles'>;
+}
+
+const { entry } = Astro.props;
+const locale = entry.data.locale as WikiLocale;
+const strings = t(locale);
+const seo = await getSeoDescriptor(articleUrl(entry.data.id, locale));
+const { Content, headings } = await render(entry);
+const allArticles = await getCollection('articles');
+const allCategories = await getCollection('categories');
+const isAuthoritativeArticleIndex = entry.data.id === 'authoritative-articles';
+const authoritativeArticles = allArticles
+  .filter((article) => article.data.locale === locale && article.data.authoritative)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title, locale));
+const english = allArticles.find(
+  (article) => article.data.id === entry.data.id && article.data.locale === 'en',
+);
+const isOutdated =
+  locale === 'pt-BR' &&
+  english?.data.revision !== undefined &&
+  (entry.data.translatedFromRevision ?? 0) < english.data.revision;
+const related = entry.data.related
+  .map((id) =>
+    allArticles.find((article) => article.data.id === id && article.data.locale === locale),
+  )
+  .filter((article): article is CollectionEntry<'articles'> => Boolean(article));
+const categories = entry.data.categories
+  .map((id) =>
+    allCategories.find((category) => category.data.id === id && category.data.locale === locale),
+  )
+  .filter((category): category is CollectionEntry<'categories'> => Boolean(category));
+const sourcePath = articleSourcePath(entry.data, entry.filePath?.endsWith('.mdx') ? 'mdx' : 'md');
+const aliases = entry.data.aliases;
+const useCompactArticleTitle = entry.data.title.length >= 40;
+const contentsHeadings = [...headings];
+if (isAuthoritativeArticleIndex) {
+  contentsHeadings.push({
+    depth: 2,
+    slug: locale === 'pt-BR' ? 'lista-de-artigos-autoritativos' : 'authoritative-article-list',
+    text: strings.authoritativeArticleList,
+  });
+}
+if (entry.data.gallery) {
+  const galleryHeading: MarkdownHeading = {
+    depth: 2,
+    slug: locale === 'pt-BR' ? 'galeria' : 'gallery',
+    text: strings.gallery,
+  };
+  const referencesIndex = contentsHeadings.findIndex((heading) =>
+    ['references', 'referencias'].includes(heading.slug),
+  );
+  contentsHeadings.splice(
+    referencesIndex === -1 ? contentsHeadings.length : referencesIndex,
+    0,
+    galleryHeading,
+  );
+}
+---
+
+<WikiLayout seo={seo} articleId={entry.data.id}>
+  <article class="wiki-article" data-pagefind-body>
+    <div class="pagefind-data" aria-hidden="true">
+      <span data-pagefind-filter="kind">{entry.data.kind}</span>
+      <span data-pagefind-meta="kindLabel">{kindLabels[locale][entry.data.kind]}</span>
+      {
+        entry.data.categories.map((category) => (
+          <span data-pagefind-filter="category">{category}</span>
+        ))
+      }
+      {aliases.map((alias) => <span data-pagefind-weight="8">{alias}</span>)}
+    </div>
+
+    <header class="article-header">
+      <h1
+        class:list={{ 'article-title-compact': useCompactArticleTitle }}
+        data-pagefind-meta="title"
+      >
+        {entry.data.title}
+      </h1>
+      <p class="article-summary" data-pagefind-meta="summary">{entry.data.summary}</p>
+      <div class="article-tools-row">
+        <ArticleActions
+          id={entry.data.id}
+          title={entry.data.title}
+          sourcePath={sourcePath}
+          locale={locale}
+        />
+      </div>
+    </header>
+
+    {
+      isOutdated && (
+        <aside class="article-notice translation-notice" role="note">
+          <strong>{strings.translationOutdated}</strong>
+          <span>{strings.translationOutdatedDetail}</span>
+          <a href={articleUrl(entry.data.id, 'en')}>{strings.englishArticle}</a>
+        </aside>
+      )
+    }
+
+    {entry.data.authoritative && <AuthorityNotice locale={locale} />}
+
+    <Infobox
+      title={entry.data.title}
+      kind={entry.data.kind}
+      locale={locale}
+      infobox={entry.data.infobox}
+    />
+
+    <TableOfContents locale={locale} headings={contentsHeadings} />
+
+    <div class="article-copy">
+      <Content />
+      {
+        isAuthoritativeArticleIndex && (
+          <AuthoritativeArticleList articles={authoritativeArticles} locale={locale} />
+        )
+      }
+    </div>
+
+    {entry.data.gallery && <ArticleGallery locale={locale} gallery={entry.data.gallery} />}
+
+    {
+      related.length > 0 && (
+        <section class="related-articles" aria-labelledby="related-title">
+          <h2 id="related-title">{strings.relatedArticles}</h2>
+          <ul>
+            {related.map((article) => (
+              <li>
+                <a href={articleUrl(article.data.id, locale)}>{article.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <footer class="article-categories">
+      <strong>{strings.categoryLabel}:</strong>
+      {
+        categories.map((category, index) => (
+          <>
+            <a href={categoryUrl(category.data.id, locale)}>{category.data.title}</a>
+            {index < categories.length - 1 && <span aria-hidden="true"> · </span>}
+          </>
+        ))
+      }
+    </footer>
+  </article>
+
+  <script>
+    document.querySelectorAll<HTMLElement>('.wiki-article').forEach((article) => {
+      const contents = article.querySelector<HTMLElement>(':scope > .table-of-contents');
+      const copy = article.querySelector<HTMLElement>(':scope > .article-copy');
+      if (!contents || !copy) return;
+
+      const firstSection = Array.from(copy.children).find((element) => element.matches('h2, h3'));
+      if (firstSection) {
+        copy.insertBefore(contents, firstSection);
+      } else {
+        copy.append(contents);
+      }
+
+      const gallery = article.querySelector<HTMLElement>(':scope > [data-article-gallery]');
+      if (!gallery) return;
+
+      const references = copy.querySelector<HTMLElement>('#references, #referencias');
+      if (references) {
+        copy.insertBefore(gallery, references);
+      } else {
+        copy.append(gallery);
+      }
+    });
+  </script>
+</WikiLayout>
