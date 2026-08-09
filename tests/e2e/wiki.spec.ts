@@ -31,6 +31,9 @@ test('Main Page presents the wiki portals and passes an accessibility scan', asy
   await expect(page.locator('.global-sidebar .navigation-heading')).not.toContainText('return moe');
   const headerBox = await page.locator('.header-inner').boundingBox();
   const headerSearchBox = await page.locator('.header-search').boundingBox();
+  const headerControlSeparatorBox = await page.locator('.header-control-separator').boundingBox();
+  expect(headerControlSeparatorBox?.width ?? 0).toBeLessThanOrEqual(2);
+  expect(headerControlSeparatorBox?.height ?? 0).toBeGreaterThanOrEqual(20);
   expect(
     Math.abs(
       (headerBox?.x ?? 0) +

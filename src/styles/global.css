@@ -369,6 +369,13 @@ kbd {
   padding-left: 0.65rem;
 }
 
+.header-control-separator {
+  background: var(--color-border-strong);
+  flex: 0 0 1px;
+  height: 22px;
+  margin: 0 0.15rem;
+}
+
 .icon-button {
   align-items: center;
   background: transparent;
