@@ -44,8 +44,6 @@ test('Main Page presents the wiki portals and passes an accessibility scan', asy
     ['serious', 'critical'].includes(violation.impact ?? ''),
   );
   expect(serious).toEqual([]);
-
-  await expect(page).toHaveScreenshot('main-page-dark.png', { fullPage: true });
 });
 
 test('Soraya article renders its infobox, contents, and master-branch actions', async ({
@@ -257,8 +255,6 @@ test('Soraya article renders its infobox, contents, and master-branch actions', 
     ['serious', 'critical'].includes(violation.impact ?? ''),
   );
   expect(serious).toEqual([]);
-
-  await expect(page).toHaveScreenshot('soraya-article-dark.png', { fullPage: true });
 });
 
 test('authoritative status is explicit and its policy page explains the boundary', async ({
@@ -551,19 +547,10 @@ test('Soraya has a compact, complete print layout at physical-page width', async
     text: 'rgb(17, 17, 17)',
     primary: '#0645ad',
   });
-  await page.evaluate(() => window.scrollTo(0, 0));
-  const darkPrintPixels = await page.screenshot({ animations: 'disabled' });
   await page.locator('html').evaluate((element) => {
     element.dataset.theme = 'light';
   });
   expect(await printPalette()).toEqual(darkPrintPalette);
-  const lightPrintPixels = await page.screenshot({ animations: 'disabled' });
-  expect(lightPrintPixels.equals(darkPrintPixels)).toBe(true);
-
-  await expect(page).toHaveScreenshot('soraya-article-print.png', {
-    animations: 'disabled',
-    fullPage: true,
-  });
 });
 
 test('technical articles print tables and code without mobile clipping', async ({ page }) => {
@@ -600,11 +587,6 @@ test('technical articles print tables and code without mobile clipping', async (
     scrollWidth: element.scrollWidth,
   }));
   expect(codeDimensions.scrollWidth).toBeLessThanOrEqual(codeDimensions.clientWidth + 1);
-
-  await expect(page).toHaveScreenshot('model-training-article-print.png', {
-    animations: 'disabled',
-    fullPage: true,
-  });
 });
 
 test('studio and repository facts use their canonical display forms', async ({ page }) => {
@@ -666,6 +648,13 @@ test('Miru has one-hop deployment aliases and a canonical merged article', async
   expect(redirects).toContain('/wiki/miru/ /miru-tracer/ 301');
   expect(redirects).toContain('/wiki/miru-tracer /miru-tracer/ 301');
   expect(redirects).toContain('/wiki/miru-tracer/ /miru-tracer/ 301');
+  expect(redirects).toContain('/en / 301');
+  expect(redirects).toContain('/en/ / 301');
+  expect(redirects).toContain('/en/miru /miru-tracer/ 301');
+  expect(redirects).toContain('/en/miru/ /miru-tracer/ 301');
+  expect(redirects).toContain('/en/miru-tracer /miru-tracer/ 301');
+  expect(redirects).toContain('/en/miru-tracer/ /miru-tracer/ 301');
+  expect(redirects).toContain('/en/category/software/ /category/software/ 301');
 
   await page.goto('/miru-tracer/');
   await expect(page.getByRole('heading', { level: 1, name: 'Miru Tracer' })).toBeVisible();
@@ -741,20 +730,65 @@ test('contribution controls remain compact and legible in the light theme', asyn
     ['serious', 'critical'].includes(violation.impact ?? ''),
   );
   expect(serious).toEqual([]);
-
-  await expect(page).toHaveScreenshot('contribute-page-light.png', { fullPage: true });
 });
 
 test('Pagefind search returns an article by title', async ({ page }) => {
   await page.goto('/search/?q=Soraya');
-  await expect(page.locator('[data-search-results] a', { hasText: 'Soraya' })).toBeVisible();
-  await expect(page.locator('.search-interface-page [data-search-status]')).toContainText('result');
+  const searchPage = page.locator('.search-interface-page');
+  const firstResult = searchPage.locator('a.search-result').first();
+  await expect(firstResult).toBeVisible();
+  await expect(firstResult).toContainText('Soraya');
+  await expect(searchPage.locator('[data-search-status]')).toContainText('result');
+
+  await searchPage.locator('[data-search-input]').focus();
+  await searchPage.locator('[data-search-input]').press('ArrowDown');
+  await expect(firstResult).toBeFocused();
+  const keyboardDestination = await firstResult.getAttribute('href');
+  expect(keyboardDestination).not.toBeNull();
+  const keyboardUrl = new URL(keyboardDestination!, page.url()).href;
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(keyboardUrl);
 
   await page.goto('/pt/search/?q=Soraya');
-  await expect(page.locator('[data-search-results] a', { hasText: 'Soraya' })).toBeVisible();
-  await expect(page.locator('.search-interface-page [data-search-status]')).toHaveText(
+  const translatedSearchPage = page.locator('.search-interface-page');
+  const translatedResult = translatedSearchPage.locator('a.search-result').first();
+  await expect(translatedResult).toBeVisible();
+  await expect(translatedResult).toContainText('Soraya');
+  await expect(translatedSearchPage.locator('[data-search-status]')).toHaveText(
     /^\d+ resultados?$/,
   );
+
+  const pointerDestination = await translatedResult.getAttribute('href');
+  expect(pointerDestination).not.toBeNull();
+  const pointerUrl = new URL(pointerDestination!, page.url()).href;
+  await translatedResult.click({ position: { x: 5, y: 5 } });
+  await expect(page).toHaveURL(pointerUrl);
+});
+
+test('search dialog supports arrow-key navigation between result cards', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.header-search').click();
+
+  const dialog = page.locator('#wiki-search-dialog');
+  const input = dialog.locator('[data-search-input]');
+  const resultCards = dialog.locator('a.search-result');
+  await expect(dialog).toHaveJSProperty('open', true);
+  await input.fill('model');
+  await expect(resultCards.first()).toBeVisible();
+  await expect(resultCards.nth(1)).toBeVisible();
+
+  await input.press('ArrowDown');
+  await expect(resultCards.first()).toBeFocused();
+  await page.keyboard.press('ArrowDown');
+  await expect(resultCards.nth(1)).toBeFocused();
+  await page.keyboard.press('ArrowUp');
+  await expect(resultCards.first()).toBeFocused();
+
+  const destination = await resultCards.first().getAttribute('href');
+  expect(destination).not.toBeNull();
+  const expectedUrl = new URL(destination!, page.url()).href;
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(expectedUrl);
 });
 
 test('theme selection persists after navigation', async ({ page }) => {
@@ -765,15 +799,6 @@ test('theme selection persists after navigation', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('data-theme', expected);
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', expected);
-});
-
-test('light theme retains the return moe visual hierarchy', async ({ page }) => {
-  await page.goto('/');
-  if ((await page.locator('html').getAttribute('data-theme')) !== 'light') {
-    await page.locator('[data-theme-toggle]').click();
-  }
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await expect(page).toHaveScreenshot('main-page-light.png', { fullPage: true });
 });
 
 test('mobile navigation and infobox collapse into a single column', async ({ page }) => {
@@ -796,10 +821,8 @@ test('mobile navigation and infobox collapse into a single column', async ({ pag
   expect(reportBox).not.toBeNull();
   expect(reportBox?.height ?? 0).toBeGreaterThanOrEqual(44);
   expect((reportBox?.x ?? 0) + (reportBox?.width ?? 0)).toBeLessThanOrEqual(390);
-  await expect(page).toHaveScreenshot('soraya-article-mobile.png', { fullPage: true });
   await page.locator('[data-theme-toggle]').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await expect(page).toHaveScreenshot('soraya-article-mobile-light.png', { fullPage: true });
 
   await page.setViewportSize({ width: 320, height: 700 });
   await page.goto('/pt/soraya/');

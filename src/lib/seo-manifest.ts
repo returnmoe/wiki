@@ -85,7 +85,7 @@ export interface SeoRedirect {
   source: string;
   destination: string;
   status: 301;
-  kind: 'alias' | 'canonical-slash';
+  kind: 'alias' | 'locale-prefix' | 'canonical-slash';
 }
 
 export interface SeoManifest {
@@ -255,25 +255,42 @@ function addLocaleRelationships(pages: SeoDescriptor[]): void {
 
 function buildRedirects(pages: SeoDescriptor[]): SeoRedirect[] {
   const redirects: SeoRedirect[] = [];
+
+  const addRedirectPair = (
+    source: string,
+    destination: string,
+    kind: SeoRedirect['kind'],
+  ): void => {
+    const sourceWithSlash = source.endsWith('/') ? source : `${source}/`;
+    redirects.push(
+      {
+        source: sourceWithSlash.slice(0, -1),
+        destination,
+        status: 301,
+        kind,
+      },
+      {
+        source: sourceWithSlash,
+        destination,
+        status: 301,
+        kind,
+      },
+    );
+  };
+
   for (const page of pages) {
     if (!page.canonicalPath) continue;
 
     for (const alias of page.redirectAliases) {
-      const aliasWithSlash = alias.endsWith('/') ? alias : `${alias}/`;
-      redirects.push(
-        {
-          source: aliasWithSlash.slice(0, -1),
-          destination: page.canonicalPath,
-          status: 301,
-          kind: 'alias',
-        },
-        {
-          source: aliasWithSlash,
-          destination: page.canonicalPath,
-          status: 301,
-          kind: 'alias',
-        },
-      );
+      addRedirectPair(alias, page.canonicalPath, 'alias');
+      if (page.locale === 'en') {
+        addRedirectPair(`/en${alias}`, page.canonicalPath, 'locale-prefix');
+      }
+    }
+
+    if (page.locale === 'en') {
+      const prefixedPath = page.canonicalPath === '/' ? '/en/' : `/en${page.canonicalPath}`;
+      addRedirectPair(prefixedPath, page.canonicalPath, 'locale-prefix');
     }
 
     if (page.canonicalPath !== '/' && page.canonicalPath.endsWith('/')) {
@@ -305,9 +322,13 @@ function buildRedirects(pages: SeoDescriptor[]): SeoRedirect[] {
     }
   }
 
+  const kindOrder: Record<SeoRedirect['kind'], number> = {
+    alias: 0,
+    'locale-prefix': 1,
+    'canonical-slash': 2,
+  };
   return redirects.sort(
-    (a, b) =>
-      (a.kind === b.kind ? 0 : a.kind === 'alias' ? -1 : 1) || a.source.localeCompare(b.source),
+    (a, b) => kindOrder[a.kind] - kindOrder[b.kind] || a.source.localeCompare(b.source),
   );
 }
 

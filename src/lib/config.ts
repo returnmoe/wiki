@@ -41,6 +41,7 @@ export const RESERVED_IDS = new Set([
   'all-pages',
   'category',
   'contribute',
+  'en',
   'index',
   'pt',
   'search',

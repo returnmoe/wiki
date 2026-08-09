@@ -156,4 +156,56 @@ describe('SEO entity and redirect generation', () => {
       },
     ]);
   });
+
+  it('redirects English-prefixed routes and aliases directly to root canonical URLs', () => {
+    const manifest = buildSeoManifest({ articles: [englishArticle], categories });
+    const localeRedirects = manifest.redirects.filter(
+      (redirect) => redirect.kind === 'locale-prefix',
+    );
+
+    expect(localeRedirects).toEqual(
+      expect.arrayContaining([
+        { source: '/en', destination: '/', status: 301, kind: 'locale-prefix' },
+        { source: '/en/', destination: '/', status: 301, kind: 'locale-prefix' },
+        {
+          source: '/en/manual-page',
+          destination: '/manual-page/',
+          status: 301,
+          kind: 'locale-prefix',
+        },
+        {
+          source: '/en/manual-page/',
+          destination: '/manual-page/',
+          status: 301,
+          kind: 'locale-prefix',
+        },
+        {
+          source: '/en/old-manual-page',
+          destination: '/manual-page/',
+          status: 301,
+          kind: 'locale-prefix',
+        },
+        {
+          source: '/en/wiki/manual-page/',
+          destination: '/manual-page/',
+          status: 301,
+          kind: 'locale-prefix',
+        },
+        {
+          source: '/en/category/projects/',
+          destination: '/category/projects/',
+          status: 301,
+          kind: 'locale-prefix',
+        },
+        {
+          source: '/en/search/',
+          destination: '/search/',
+          status: 301,
+          kind: 'locale-prefix',
+        },
+      ]),
+    );
+    expect(localeRedirects.every((redirect) => redirect.source.startsWith('/en'))).toBe(true);
+    expect(localeRedirects.every((redirect) => !redirect.destination.startsWith('/en'))).toBe(true);
+  });
 });

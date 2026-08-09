@@ -14,14 +14,14 @@ const plainExcerpt = (value = '') => {
 };
 
 const createResult = (data) => {
-  const article = document.createElement('article');
-  article.className = 'search-result';
+  const title = data.meta?.title || data.url;
+  const link = document.createElement('a');
+  link.className = 'search-result';
+  link.href = data.url;
+  link.setAttribute('aria-label', title);
 
   const heading = document.createElement('h2');
-  const link = document.createElement('a');
-  link.href = data.url;
-  link.textContent = data.meta?.title || data.url;
-  heading.append(link);
+  heading.textContent = title;
 
   const metadata = document.createElement('p');
   metadata.className = 'search-result-meta';
@@ -30,10 +30,10 @@ const createResult = (data) => {
   const excerpt = document.createElement('p');
   excerpt.textContent = data.meta?.summary || plainExcerpt(data.excerpt);
 
-  article.append(heading);
-  if (metadata.textContent) article.append(metadata);
-  article.append(excerpt);
-  return article;
+  link.append(heading);
+  if (metadata.textContent) link.append(metadata);
+  link.append(excerpt);
+  return link;
 };
 
 const bindSearch = (root) => {
@@ -47,6 +47,14 @@ const bindSearch = (root) => {
   const status = root.querySelector('[data-search-status]');
   let request = 0;
   let timer;
+
+  const resultLinks = () => [...(results?.querySelectorAll('a.search-result') || [])];
+
+  const focusResult = (index) => {
+    const links = resultLinks();
+    if (!links.length) return;
+    links[(index + links.length) % links.length].focus();
+  };
 
   const run = async () => {
     const query = input?.value.trim() || '';
@@ -92,6 +100,30 @@ const bindSearch = (root) => {
   };
 
   input?.addEventListener('input', schedule);
+  input?.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+    const links = resultLinks();
+    if (!links.length) return;
+    event.preventDefault();
+    focusResult(event.key === 'ArrowDown' ? 0 : links.length - 1);
+  });
+  results?.addEventListener('keydown', (event) => {
+    if (!(event.target instanceof Element)) return;
+    const current = event.target.closest('a.search-result');
+    if (!current) return;
+
+    const links = resultLinks();
+    const index = links.indexOf(current);
+    if (index < 0) return;
+
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      focusResult(index + (event.key === 'ArrowDown' ? 1 : -1));
+    } else if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault();
+      focusResult(event.key === 'Home' ? 0 : links.length - 1);
+    }
+  });
   kind?.addEventListener('change', run);
   category?.addEventListener('change', run);
   root.addEventListener('submit', (event) => {

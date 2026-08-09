@@ -2104,17 +2104,23 @@ dialog::backdrop {
   background: var(--color-surface-alt);
   border: 1px solid var(--color-border);
   border-radius: 0.55rem;
+  color: var(--color-text);
+  display: block;
   padding: 1rem 1.1rem;
 }
 
+.search-result:hover,
+.search-result:focus-visible {
+  background: var(--color-surface-hover);
+  border-color: color-mix(in srgb, var(--color-primary) 50%, var(--color-border));
+  color: var(--color-text);
+}
+
 .search-result h2 {
+  color: var(--color-primary);
   font-size: 1rem;
   letter-spacing: -0.015em;
   margin-bottom: 0.3rem;
-}
-
-.search-result h2 a {
-  color: var(--color-primary);
 }
 
 .search-result p {

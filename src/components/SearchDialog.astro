@@ -38,11 +38,17 @@ const strings = t(locale);
         name="q"
         autocomplete="off"
         placeholder={strings.searchPlaceholder}
+        aria-controls="wiki-search-dialog-results"
         data-search-input
       />
     </label>
     <div class="search-status" data-search-status aria-live="polite"></div>
-    <div class="search-results search-results-dialog" data-search-results></div>
+    <div
+      id="wiki-search-dialog-results"
+      class="search-results search-results-dialog"
+      data-search-results
+    >
+    </div>
   </form>
 </dialog>
 

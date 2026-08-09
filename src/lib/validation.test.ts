@@ -52,6 +52,11 @@ describe('content model validation', () => {
     expect(errors.some((error) => error.includes('collides with a redirect'))).toBe(true);
   });
 
+  it('reserves the English locale prefix', () => {
+    const errors = validate([article({ id: 'en' })]);
+    expect(errors.some((error) => error.includes('article ID "en" is reserved'))).toBe(true);
+  });
+
   it('rejects invalid infobox keys and raw HTML', () => {
     const invalid = article({ infobox: { fields: [{ key: 'headquarters', value: 'Nowhere' }] } });
     invalid.body = '<script>alert(1)</script>';

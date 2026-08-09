@@ -29,5 +29,5 @@ jobs:
         run: npm ci
       - name: Verify the production build
         run: npm run verify
-      - name: Run browser, accessibility, and visual tests
+      - name: Run browser and accessibility tests
         run: npx playwright test

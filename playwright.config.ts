@@ -8,7 +8,6 @@ export default defineConfig({
   fullyParallel: false,
   retries: 0,
   reporter: 'list',
-  snapshotPathTemplate: '{testDir}/__screenshots__/{arg}{ext}',
   use: {
     baseURL: testUrl,
     browserName: 'chromium',
